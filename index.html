@@ -143,7 +143,69 @@
     .status-open:hover{background:#edf8fe;text-decoration:none}
     @media(max-width:520px){.status-row{grid-template-columns:minmax(0,1fr) auto;gap:8px}.status-open{grid-column:1/-1;justify-self:start;margin-top:2px}}
 
-  </style>
+  
+  /* V5 targeted layout and usability refinements. Existing design tokens and parsers are unchanged. */
+  .decision-grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+  .decision-card{min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:normal}
+  .decision-card h3{min-width:0;overflow-wrap:anywhere;hyphens:auto;line-height:1.45}
+  .decision-card p,.decision-card li,.decision-card a{min-width:0;overflow-wrap:anywhere;word-break:normal}
+  .ack-page-title{margin:0 0 16px}
+  .ack-list{display:grid;grid-template-columns:1fr;gap:10px;max-width:1000px}
+  .ack-list .ack-card{padding:15px 18px;border-radius:9px}
+  .ack-card-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .ack-card-top h3{margin:0;font-size:14px;line-height:1.35;color:var(--navy)}
+  .ack-card-icon{width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:var(--sky);color:var(--blue);display:grid;place-items:center}
+  .ack-list .ack-content{font-size:12px;line-height:1.65;color:#596a7b;overflow-wrap:anywhere}
+  .ack-list .ack-content p{margin:0 0 8px}
+  .ack-list .ack-content p:last-child{margin-bottom:0}
+  .hero-title-icon{width:48px;height:48px}
+  .hero-title-icon svg{width:25px;height:25px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .incident-btn{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;width:100%;min-width:0;text-align:center}
+  .incident-btn .incident-icon{margin:0 auto 9px;flex:0 0 56px;align-self:center}
+  .incident-btn>span:last-child{display:block;width:100%;text-align:center;line-height:1.35;max-width:180px;margin:0 auto}
+  .incident-icon svg{display:block;width:25px;height:25px;margin:0 auto;flex:0 0 auto}
+  .stage-label .svg-icon{display:block;width:22px;height:22px;margin-top:7px;stroke:currentColor;fill:none;stroke-width:1.8}
+  .db-switch{background:#e9f1f7;border:1px solid #d8e5ef;border-radius:10px;justify-content:flex-start;flex-wrap:wrap;padding:5px}
+  .db-tab{background:transparent;color:#506176;border:1px solid transparent;transition:background .15s,color .15s}
+  .db-tab:hover{background:#dcebf5;color:var(--navy)}
+  .db-tab.active{background:var(--navy)!important;color:#fff!important;border-color:var(--navy);box-shadow:0 2px 6px #1c293c30}
+  .table-wrap{max-width:100%;overscroll-behavior-x:contain}
+  .db-table{width:max-content;min-width:100%;table-layout:auto;border-collapse:separate;border-spacing:0}
+  .db-table th{min-width:165px;max-width:245px;white-space:normal;vertical-align:bottom;padding:11px 12px;overflow-wrap:anywhere;word-break:normal;line-height:1.35}
+  .db-table th:first-child{min-width:210px;max-width:260px}
+  .db-table th button{display:block;width:100%;white-space:normal;overflow-wrap:anywhere;word-break:normal;line-height:1.35;text-align:left}
+  .db-table td{min-width:165px;max-width:260px;white-space:normal;overflow-wrap:anywhere;word-break:normal;line-height:1.5}
+  .db-table td:first-child{min-width:210px}
+  .db-table td.notes-cell{min-width:240px;max-width:330px}
+  .db-table tbody tr{cursor:pointer}
+  .db-table tbody tr:hover{background:#edf7fd}
+  .db-table .first-col{position:sticky;left:0;z-index:2;background:#f7fbfe;box-shadow:2px 0 0 #e5edf4}
+  .db-table thead .first-col{z-index:4;background:var(--navy)}
+  .detail-field dd{line-height:1.55;overflow-wrap:anywhere}
+  .detail-field .value-flag{margin:1px 3px 2px 0}
+  .detail-field .db-cell-text{white-space:pre-line;line-height:1.6}
+  .hero-tertiary{border:1px solid #506780;background:#263c53;color:#fff}
+  .hero-tertiary:hover{background:#314e6b;border-color:#6e8aa6;color:#fff}
+  .resource-count{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;margin-left:7px;border-radius:999px;background:#e8f4fb;color:#168cc0;font-size:10px;font-weight:800;letter-spacing:0}
+  .events-grid{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;gap:18px}
+  .event-card{min-width:0;display:flex;flex-direction:column;gap:9px;height:100%}
+  .event-card-head{display:flex;gap:12px;align-items:flex-start}
+  .event-card-head .resource-icon{flex:0 0 38px;margin:0}
+  .event-card-head h3{margin:0 0 4px}
+  .event-kicker{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:800;margin-bottom:3px}
+  .event-card p{margin:0;color:#657589;font-size:11px;line-height:1.65;white-space:pre-line}
+  .event-video{position:relative;width:100%;aspect-ratio:16/9;background:#172334;border-radius:8px;overflow:hidden;margin-top:4px}
+  .event-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .event-link{display:inline-flex;align-items:center;gap:6px;margin-top:auto;padding-top:4px}
+  .events-heading{display:flex;align-items:center;gap:4px}
+  .hero-actions{align-items:stretch}
+  .footer-bottom .container{justify-content:flex-start}
+  @media(max-width:1100px){.decision-grid{gap:16px}.decision-card{padding-inline:12px}.db-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.db-controls input{grid-column:1/-1}}
+  @media(max-width:760px){.decision-grid{grid-template-columns:1fr;gap:14px}.decision-card{border-right:0;border-bottom:1px solid #e7edf2;padding:8px 0 15px}.decision-card:last-child{border-bottom:0}.events-grid{grid-template-columns:1fr}.hero-actions>button{width:min(100%,340px)}.incident-grid{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:18px}.db-switch{border-radius:10px}.db-tab{flex:1 1 100%;text-align:left}}
+
+  .resource-layout.has-no-other-publications{grid-template-columns:minmax(0,1fr)}
+  .resource-layout .resource-column[hidden]{display:none!important}
+</style>
 </head>
 <body>
   <div class="utility"><div class="container"><a href="https://unidir.org/" target="_blank" rel="noopener noreferrer"><i class="ph-bold ph-arrow-left"></i> Back to unidir.org</a></div></div>
@@ -162,7 +224,6 @@
         <button class="nav-btn" id="nav-resources" onclick="navigate('resources')">Resources</button>
       </nav>
       <div class="header-actions">
-        <button class="source-button" onclick="openSourceStatus()" title="View data-source status"><span class="source-dot" id="source-dot"></span><span id="source-label">Checking data</span></button>
         <button class="mobile-menu" aria-label="Open navigation" onclick="toggleMobileNav()"><span class="menu-bars"></span></button>
       </div>
     </div>
@@ -185,6 +246,7 @@
           <div class="hero-actions">
             <button class="hero-primary" onclick="navigate('databases')"><span class="hero-action-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></span> Explore the databases</button>
             <button class="hero-secondary" onclick="navigate('how')"><span class="hero-action-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg></span> How it works</button>
+            <button class="hero-tertiary" onclick="navigate('progress')"><span class="hero-action-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5m0 14h17M7 15l4-4 3 2 6-7"/><path d="M15 6h5v5"/></svg></span> Progress Case Studies</button>
           </div>
         </div>
       </div>
@@ -252,7 +314,7 @@
           <div class="section-kicker">Contributions</div><h2 class="section-title">Organizations contributing to this work</h2><p class="section-intro">The following organizations and networks are listed in the Portal's contributions worksheet.</p><div class="contribution-grid" id="contributions-content"><div class="contribution-card">Loading contribution data…</div></div>
         </div>
         <div class="tab-panel" id="home-tab-acknowledgements">
-          <div class="section-kicker">Acknowledgements</div><h2 class="section-title">About the Portal and its development</h2><p class="section-intro">Acknowledgements, programme context and disclaimer text are maintained in the source spreadsheet.</p><div class="ack-grid" id="acknowledgements-content"><div class="ack-card">Loading acknowledgements…</div></div>
+          <h2 class="section-title ack-page-title">Acknowledgements</h2><div class="ack-list" id="acknowledgements-content"><div class="ack-card">Loading acknowledgements…</div></div>
         </div>
       </div>
     </section>
@@ -260,20 +322,20 @@
     <!-- V4: explicit per-worksheet GIDs, strict signatures, HTML/CSV/GViz/JSONP parsers, and inline SVG icon fallbacks. -->
     <!-- HOW IT WORKS: the six fictional incident examples and the interactive four-stage process follow the supplied mock-up. -->
     <section class="page" id="page-how">
-      <div class="hero compact"><div class="container hero-inner"><div class="hero-title-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 12 18.3 5.7M12 12V3m0 9 6.4 6.4"/><path d="M12 7a5 5 0 1 0 5 5"/></svg></div><h1>Where arms-related data fits in the early-warning process</h1><p>Follow the four stages of early warning. Arms-related data is most relevant at the collection and analysis stages.</p></div></div>
+      <div class="hero compact"><div class="container hero-inner"><div class="hero-title-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="2.5" width="8" height="5" rx="1.5"/><rect x="1.5" y="16.5" width="8" height="5" rx="1.5"/><rect x="14.5" y="16.5" width="8" height="5" rx="1.5"/><path d="M12 7.5v4m-6.5 5v-2.5h13V16.5M12 11.5H5.5m6.5 0h6.5"/></svg></div><h1>Where arms-related data fits in the early-warning process</h1><p>Follow the four stages of early warning. Arms-related data is most relevant at the collection and analysis stages.</p></div></div>
       <div class="container shell">
         <div class="incident-head"><div class="section-kicker">Arms-related incidents</div><p class="section-intro" style="margin:0 auto 20px">Click any incident for a fictional scenario in which arms-related data may be collected.</p></div>
         <div class="incident-grid" id="incident-grid"></div>
         <div class="flow-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v17m-6-6 6 6 6-6"/></svg></div>
         <div class="stage-card">
-          <div class="stage-label"><small>STAGE</small><strong>1</strong><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18l-7 8v6l-4 2v-8L3 4Z"/></svg></div>
+          <div class="stage-label"><small>STAGE</small><strong>1</strong><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H5v17h14V4h-3M9 3h6v4H9zM8 12l1.5 1.5L12 11m2 2h2M8 17l1.5 1.5L12 16m2 1h2"/></svg></div>
           <div class="stage-body"><h2 class="stage-heading"><span class="stage-heading-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H5v17h14V4h-3M9 3h6v4H9zM8 12h8m-8 4h8"/></svg></span>Data collection</h2><div class="micro-label">What happens</div><p>Data is collected from a range of sources: from monitors reporting incidents they observe in their communities or in the field; from scanning news articles; from other open sources, including social media; and/or from governments or civil society partners.</p><p>Collected data can be qualitative (e.g., descriptions of events and trends), or quantitative (e.g., numerical figures or statistics).</p></div>
           <div class="stage-fit"><div class="fit-box"><div class="micro-label">Where arms-related data fits</div><p>Early-warning systems can collect or use many different types of arms-related data. Field monitors, for example, might report rising prices of weapons in the market, which may indicate increased demand and a heightened potential for conflict. Early-warning analysts may obtain governmental data on the number of weapon seizures at a port.</p><p><a href="https://unidir.org/publication/the-arms-related-risk-analysis-toolkit-practical-guidance-for-integrating-conventional-arms-related-risks-into-conflict-analysis-and-prevention/" target="_blank" rel="noopener noreferrer">UNIDIR’s Arms-Related Risk Analysis Toolkit</a> sets out a detailed list of arms-related indicators of conflict against which data can be collected. An early-warning system may select indicators depending on (i) its capacity to collect the data, (ii) the type of analysis it undertakes, and/or (iii) the intended final analytical product.</p></div></div>
           <div class="stage-actions"><button class="pill-action" onclick="openHowDetail('community')">＋ &nbsp;Collection by community, government, or other reports</button><button class="pill-action" onclick="openHowDetail('automated')">＋ &nbsp;Collection by automated data extraction</button></div>
         </div>
         <div class="flow-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v17m-6-6 6 6 6-6"/></svg></div>
         <div class="stage-card">
-          <div class="stage-label"><small>STAGE</small><strong>2</strong><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V11m5 9V5m5 15v-7m5 7V3"/></svg></div>
+          <div class="stage-label"><small>STAGE</small><strong>2</strong><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18M6 18v-5m6 5V8m6 10V4"/><path d="M4 9h4m2-4h4m2-4h4"/></svg></div>
           <div class="stage-body"><h2 class="stage-heading"><span class="stage-heading-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20V4m0 16h18M6 15l5-5 4 3 6-8"/></svg></span>Data analysis</h2><div class="micro-label">What happens</div><p>Once collected, data is processed, including by verification, cleaning, corroboration, weighting, or combination with other sources. Analysts or models then analyze the data for patterns and trends that may indicate whether conflict may break out, persist, or intensify. This may occur at a regional, national, or local level.</p><p>Methodological approaches vary and may be used in combination. They include traditional methods (e.g., qualitative expert assessments) and computational methods (e.g., forecasting models based on machine learning that process large volumes of data).</p></div>
           <div class="stage-fit"><div class="fit-box"><div class="micro-label">Where arms-related data fits</div><p>While the precise causal links have not yet been fully established, research has shown that, in specific circumstances, the proliferation or use of illicit weapons can impact conflict.</p><p>Considered together with other data, and contextual factors specific to a region, nation, or locality, arms-related data may provide a useful indication of the risk that conflict may occur, persist, or intensify.</p></div></div>
           <div class="stage-actions"><button class="pill-action" onclick="openHowDetail('benefits')">＋ &nbsp;Benefits of incorporating arms-related data</button><button class="pill-action" onclick="openHowDetail('challenges')">＋ &nbsp;Challenges with incorporating arms-related data</button></div>
@@ -316,7 +378,7 @@
           <div class="resource-column"><h2>UNIDIR publications</h2><div id="unidir-resources"></div></div>
           <div class="resource-column other"><h2>Other publications</h2><div id="other-resources"></div></div>
         </div>
-        <div class="section-kicker" style="margin-top:32px">Events</div><div class="events-grid" id="events-grid"></div>
+        <div class="section-kicker events-heading" style="margin-top:32px">Events</div><div class="events-grid" id="events-grid"></div>
         <div class="cta"><div><strong>Want your resource to be featured on this page?</strong><small>Get in touch with the UNIDIR team.</small></div><a class="cta-arrow" href="mailto:cap-unidir@un.org?subject=Resource%20for%20the%20Portal" aria-label="Contact UNIDIR"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
       </div>
     </section>
@@ -391,7 +453,7 @@
         </div>
       </div>
     </div>
-    <div class="footer-bottom"><div class="container"><span>© <span id="footer-year"></span> UNIDIR. All rights reserved.</span><span id="footer-last-update">Data source status: checking…</span></div></div>
+    <div class="footer-bottom"><div class="container"><span>© <span id="footer-year"></span> UNIDIR. All rights reserved.</span></div></div>
   </footer>
 
   <div class="modal-backdrop" id="modal-backdrop" onclick="closeModal(event)"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" onclick="event.stopPropagation()"><div class="modal-bar"></div><div class="modal-head"><h2 id="modal-title">Details</h2><button class="modal-close" aria-label="Close dialog" onclick="closeModal()">×</button></div><div class="modal-content" id="modal-content"></div></div></div>
@@ -428,7 +490,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
 
     const INCIDENTS = [
       {key:'Armed_attacks',label:'Armed attacks',icon:'burst'},
-      {key:'Small_arms_and_ammunition_observations',label:'Small arms and ammunition observations',icon:'crosshair'},
+      {key:'Small_arms_and_ammunition_observations',label:'Small arms and ammunition observations',icon:'cartridges'},
       {key:'Authorized_arms_trade',label:'Authorized arms trade',icon:'file-check'},
       {key:'Price_fluctuations',label:'Price fluctuations',icon:'chart-line'},
       {key:'Cross-border_shipments_and_diversions',label:'Cross-border shipments and diversions',icon:'arrows'},
@@ -474,6 +536,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
       'chart-line':'<path d="M3 3v18h18M5 15l5-5 4 3 7-8"/><path d="M16 5h5v5"/>',
       arrows:'<path d="M4 8h15m-5-5 5 5-5 5M20 16H5m5-5-5 5 5 5"/>',
       'shield-check':'<path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/>',
+      cartridges:'<path d="M5 21V9l2-5 2 5v12M4 15h6M11 21V7l2-4 2 4v14m-4-6h4M17 21v-9l2-4 2 4v9m-4-4h4"/>' ,
       radar:'<circle cx="12" cy="12" r="9"/><path d="M12 12 18.3 5.7M12 12V3m0 9 6.4 6.4"/><path d="M12 7a5 5 0 1 0 5 5"/>',
       database:'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
       landmark:'<path d="m3 9 9-6 9 6M4 10h16M5 10v9m4-9v9m6-9v9m4-9v9M3 21h18"/>',
@@ -529,13 +592,14 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
     }
     function renderAcknowledgements(){
       const list=rows('homeAcknowledgments').filter(r=>firstField(r,['Sub-Heading','Heading'])||field(r,'Content'));
-      const order=[...new Set(list.map(r=>field(r,'Heading')||'Additional information'))];
-      const groupIcon={'Acknowledgments':'info','About':'landmark','Disclaimer':'lock'};
-      document.getElementById('acknowledgements-content').innerHTML=order.map((heading,index)=>{
-        const items=list.filter(r=>(field(r,'Heading')||'Additional information')===heading);
-        return `<section class="ack-section"><div class="ack-section-head"><span class="ack-section-icon">${svgIcon(groupIcon[heading]||'info',19)}</span><div><div class="section-kicker">${esc(heading)}</div><h2>${heading==='Acknowledgments'?'Acknowledgements':esc(heading)}</h2></div></div><div class="ack-section-grid ${heading==='Disclaimer'?'single':''}">${items.map((r,i)=>`<article class="ack-card"><h3>${esc(field(r,'Sub-Heading')||heading)}</h3><div class="ack-card-rule"></div><div class="ack-content">${rich(field(r,'Content'))}</div></article>`).join('')}</div></section>`;
+      const iconByHeading={'Acknowledgments':'info','About':'landmark','Disclaimer':'lock'};
+      document.getElementById('acknowledgements-content').innerHTML=list.map(r=>{
+        const group=field(r,'Heading');
+        const title=field(r,'Sub-Heading')||((group==='Disclaimer')?'Disclaimer':group);
+        return `<article class="ack-card"><div class="ack-card-top"><span class="ack-card-icon">${svgIcon(iconByHeading[group]||'info',17)}</span><h3>${esc(title)}</h3></div><div class="ack-content">${rich(field(r,'Content'))}</div></article>`;
       }).join('');
     }
+
     function renderIncidents(){const row=howRow();document.getElementById('incident-grid').innerHTML=INCIDENTS.map((item,i)=>`<button class="incident-btn" onclick="openIncident(${i})"><span class="incident-icon">${svgIcon(item.icon,25)}</span><span>${esc(item.label)}</span></button>`).join('');
       document.getElementById('how-case-studies').innerHTML=CASES.map(c=>`<button class="case-row" onclick="openCaseStudy('${esc(c.key)}')"><span>${esc(c.label)}</span>${svgIcon('plus',16)}</button>`).join('');
     }
@@ -556,7 +620,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
       const name=dbTab==='sources'?'Mapping of Arms-Related Data':'Mapping of Early-Warning Initiatives';
       const data=rows(key);const columns=Object.keys(data[0]||{}).filter(k=>k&&!/^__blank_/i.test(k)&&!/^__parsed_extra/i.test(k));
       const filters=dbTab==='sources'?['Type of Organization {1}','Intended Coverage{2}','Type of release{3}','Release timing{4}','Types of flows collected{11}']:['Methodological Approach{12}','Forecasting / Monitoring{13}','Transparency{21}','Location'];
-      return {key,name,pageSize:10,columns,filters};
+      return {key,name,pageSize:7,columns,filters};
     }
     function findHeader(row,header){const n=norm(header);const key=Object.keys(row||{}).find(k=>norm(k)===n);return key||header;}
     function renderDatabase(){
@@ -565,7 +629,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
       if(control.dataset.tab!==dbTab){control.dataset.tab=dbTab;control.innerHTML=`<input id="db-search" type="search" placeholder="Search names, organizations, methods, themes…" aria-label="Search database">${cfg.filters.map((f,i)=>`<select id="db-filter-${i}" aria-label="Filter by ${esc(f)}"><option value="">${esc(f.replace(/\{\d+\}/g,''))} · all</option></select>`).join('')}<button onclick="resetDatabaseFilters()">Clear filters</button>`;document.getElementById('db-search').addEventListener('input',()=>{dbPage=1;renderDatabaseResults();});cfg.filters.forEach((f,i)=>document.getElementById(`db-filter-${i}`).addEventListener('change',()=>{dbPage=1;renderDatabaseResults();}));cfg.filters.forEach((f,i)=>{const sel=document.getElementById(`db-filter-${i}`);const key=findHeader(data[0],f);const values=[...new Set(data.map(r=>field(r,key)).filter(Boolean))].sort((a,b)=>a.localeCompare(b));values.forEach(v=>{const op=document.createElement('option');op.value=v;op.textContent=v;sel.appendChild(op);});});}
       renderDatabaseResults();renderDefinitions();
     }
-    function databaseHeaderLabel(header){return esc(String(header).replace(/\s*\{(\d+)\}/g,'')).replace(/$^/,'')+String(header).replace(/\s*\{(\d+)\}/g,(_,n)=>`<sup class="note-ref">${n}</sup>`);}
+    function databaseHeaderLabel(header){const raw=String(header??'');const label=raw.replace(/\s*\{(\d+)\}/g,'').trim();const notes=[...raw.matchAll(/\{(\d+)\}/g)].map(m=>m[1]);return esc(label)+notes.map(n=>`<sup class="note-ref">${n}</sup>`).join('');}
     function databaseCell(value,isPrimary,header){
       const v=String(value??'').trim();if(!v)return '<span class="db-empty">—</span>';
       const n=norm(v);
@@ -590,22 +654,39 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
     function sortDatabase(key){if(dbSort.key===key)dbSort.dir*=-1;else dbSort={key,dir:1};renderDatabaseResults();}
     function changeDatabasePage(direction){dbPage+=direction;renderDatabaseResults();}
     function resetDatabaseFilters(){if(document.getElementById('db-search'))document.getElementById('db-search').value='';databaseConfig().filters.forEach((_,i)=>{const el=document.getElementById(`db-filter-${i}`);if(el)el.value='';});dbSort={key:'',dir:1};dbPage=1;renderDatabaseResults();}
-    function openDatabaseEntry(index){const row=dbFilteredRows[(dbPage-1)*dbPageSize+index];if(!row)return;const title=field(row,'Sources of arms and ammunition flows data')||field(row,'Initiative')||'Database entry';const fields=Object.entries(row).filter(([k,v])=>String(v??'').trim()!=='').map(([k,v])=>`<div class="detail-field"><dt>${esc(k)}</dt><dd>${rich(v)}</dd></div>`).join('');openModal(title,`<div class="detail-grid">${fields}</div>`);}
+    function openDatabaseEntry(index){const row=dbFilteredRows[(dbPage-1)*dbPageSize+index];if(!row)return;const title=field(row,'Sources of arms and ammunition flows data')||field(row,'Initiative')||'Database entry';const fields=Object.entries(row).filter(([k,v])=>String(v??'').trim()!=='').map(([k,v])=>`<div class="detail-field"><dt>${databaseHeaderLabel(k)}</dt><dd>${databaseCell(v,false,k)}</dd></div>`).join('');openModal(title,`<div class="detail-grid">${fields}</div>`);}
     function exportDatabaseCsv(){const cfg=databaseConfig();const data=dbFilteredRows;if(!data.length){toast('No rows to export');return;}const keys=Object.keys(data[0]);const cell=v=>'"'+String(v??'').replace(/"/g,'""')+'"';const csv=[keys.map(cell).join(','),...data.map(r=>keys.map(k=>cell(r[k])).join(','))].join('\r\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=(dbTab==='sources'?'arms-related-data-sources':'early-warning-initiatives')+'.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);}
     function toggleDefinitions(){const grid=document.getElementById('definitions-grid');const open=grid.classList.toggle('open');document.getElementById('definitions-toggle').textContent=open?'− Hide definitions':'＋ Show definitions';}
     function renderDefinitions(){document.getElementById('definitions-grid').innerHTML=FIELD_DEFINITIONS.map(([n,title,desc])=>`<article class="definition-item" data-number="${n}"><strong>${esc(title)}</strong><p>${esc(desc)}</p></article>`).join('');}
 
     function renderResources(){
-      const all=rows('resources');const publications=all.filter(r=>field(r,'Heading')==='UNIDIR PUBLICATIONS'&&field(r,'Title'));const other=all.filter(r=>field(r,'Heading')==='OTHER PUBLICATIONS'&&field(r,'Title'));const events=all.filter(r=>field(r,'Heading')==='EVENTS'&&field(r,'Title'));
-      const resourceCard=(r,i)=>`<article class="resource-card"><span class="resource-icon">${svgIcon('book',19)}</span><div><h3>${esc(field(r,'Title'))}</h3><div class="sub">${esc(field(r,'Sub-title'))}</div><p>${esc(field(r,'Description'))}</p></div>${field(r,'Hyperlink')?`<a class="resource-open" href="${esc(field(r,'Hyperlink'))}" target="_blank" rel="noopener noreferrer" aria-label="Open resource">${svgIcon('external',16)}</a>`:''}</article>`;
+      const all=rows('resources');
+      const category=r=>field(r,'Heading').replace(/\s+/g,' ').trim().toUpperCase();
+      const hasTitle=r=>Boolean(field(r,'Title').replace(/[\u200b\u00a0]/g,'').trim());
+      const publications=all.filter(r=>category(r)==='UNIDIR PUBLICATIONS'&&hasTitle(r));
+      const other=all.filter(r=>category(r)==='OTHER PUBLICATIONS'&&hasTitle(r));
+      const events=all.filter(r=>category(r)==='EVENTS'&&hasTitle(r));
+      const resourceCard=r=>`<article class="resource-card"><span class="resource-icon">${svgIcon('book',19)}</span><div><h3>${esc(field(r,'Title'))}</h3><div class="sub">${esc(field(r,'Sub-title'))}</div><p>${rich(field(r,'Description'))}</p></div>${field(r,'Hyperlink')?`<a class="resource-open" href="${esc(field(r,'Hyperlink'))}" target="_blank" rel="noopener noreferrer" aria-label="Open resource">${svgIcon('external',16)}</a>`:''}</article>`;
       document.getElementById('unidir-resources').innerHTML=publications.map(resourceCard).join('');
-      document.getElementById('other-resources').innerHTML=other.length?other.map(resourceCard).join(''):`<div class="empty-publications"><i class="ph ph-file-plus" style="font-size:35px"></i><span style="font-size:10px">No entries currently listed in the source sheet.</span></div>`;
-      const eventCard=(r,i)=>`<article class="event-card ${i===1?'wide':''}"><div class="resource-icon" style="margin-bottom:10px">${svgIcon('calendar',19)}</div><h3>${esc(field(r,'Title'))}</h3><div class="sub" style="font-size:9px;color:#9aa6b2;font-weight:800;text-transform:uppercase;letter-spacing:.1em">${esc(field(r,'Sub-title'))}</div><p>${esc(field(r,'Description'))}</p>${field(r,'Hyperlink')?`<a class="small-action" href="${esc(field(r,'Hyperlink'))}" target="_blank" rel="noopener noreferrer">View event / recording ↗</a>`:''}</article>`;
-      const video=`<div class="video-card"><iframe src="https://www.youtube-nocookie.com/embed/m4_ffgVohLc?list=PLWEA0eQGaKX4&index=15" title="Innovating for Peace: Strengthening Arms-Related Violence Risks in Early Warning" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
-      const eventHtml=events.map(eventCard);document.getElementById('events-grid').innerHTML=[eventHtml[0]||'',video,eventHtml[1]||'',...eventHtml.slice(2)].join('');
+      document.getElementById('other-resources').innerHTML=other.length?other.map(resourceCard).join(''):'';const otherColumn=document.querySelector('#page-resources .resource-column.other');if(otherColumn)otherColumn.hidden=!other.length;const resourceLayout=document.querySelector('#page-resources .resource-layout');if(resourceLayout)resourceLayout.classList.toggle('has-no-other-publications',!other.length);
+      const youtubeId=url=>{const value=String(url||'');const match=value.match(/(?:youtube(?:-nocookie)?\.com\/(?:watch\?(?:[^#]*&)?v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/i);return match?match[1]:'';};
+      const eventCard=r=>{
+        const link=field(r,'Hyperlink');const videoId=youtubeId(link);
+        const video=videoId?`<div class="event-video"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="${esc(field(r,'Title'))} — event recording" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`:'';
+        const action=link?`<a class="small-action event-link" href="${esc(link)}" target="_blank" rel="noopener noreferrer">${videoId?'Watch recording':'View event'} ${svgIcon('external',12)}</a>`:'';
+        return `<article class="event-card"><div class="event-card-head"><span class="resource-icon">${svgIcon('calendar',19)}</span><div><div class="event-kicker">Event</div><h3>${esc(field(r,'Title'))}</h3><div class="sub">${esc(field(r,'Sub-title'))}</div></div></div><p>${rich(field(r,'Description'))}</p>${video}${action}</article>`;
+      };
+      document.getElementById('events-grid').innerHTML=events.length?events.map(eventCard).join(''):`<div class="empty-publications">No events are currently listed in the source worksheet.</div>`;
+      const eventsHeading=document.querySelector('#page-resources .events-heading');
+      if(eventsHeading)eventsHeading.innerHTML=`Events <span class="resource-count">${events.length}</span>`;
+      const pubHeading=document.querySelector('#page-resources .resource-column:not(.other) h2');
+      if(pubHeading)pubHeading.innerHTML=`UNIDIR publications <span class="resource-count">${publications.length}</span>`;
+      const otherHeading=document.querySelector('#page-resources .resource-column.other h2');
+      if(otherHeading)otherHeading.innerHTML=`Other publications <span class="resource-count">${other.length}</span>`;
     }
 
-    function updateSourceBadge(){const vals=Object.values(SOURCE_STATUS);const live=vals.filter(s=>s.state==='live').length;const loading=vals.some(s=>s.state==='loading');const dot=document.getElementById('source-dot');dot.className='source-dot'+(live?' live':loading?' loading':'');document.getElementById('source-label').textContent=loading?'Syncing Google Sheets':live===vals.length?'Google Sheets live':live?`${live}/${vals.length} live`:'Workbook snapshot';document.getElementById('footer-last-update').textContent=live?`Live Google Sheets data · ${new Date().toLocaleString()}`:'Embedded workbook snapshot · live refresh unavailable';}
+
+    function updateSourceBadge(){/* Source refresh remains automatic; connection-status labels are intentionally not displayed in the public interface. */}
     function openSourceStatus(){
       const content=SOURCE_CONFIG.map(s=>{const st=SOURCE_STATUS[s.key];const label=st.state==='live'?'Live':st.state==='loading'?'Loading':'Snapshot';const cls=st.state==='live'?'status-live':'status-snapshot';const url=`${PUBLISHED_BASE}/pubhtml#gid=${encodeURIComponent(s.gid)}`;return `<div class="status-row"><span>${esc(s.label)}<br><small style="color:#93a0ad;font-weight:400">Tab: ${esc(s.sheetName)} · GID ${esc(s.gid)} · ${esc(st.message||'')}</small></span><span class="${cls}">${label}</span><a class="status-open" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Open sheet ${svgIcon('external',11)}</a></div>`;}).join('');
       openModal('Data-source connections',`<p>Each worksheet has its own explicitly configured published Google Sheets GID. A source is marked Live only after its response matches that worksheet’s required column signature. The source links below open the exact published tab. If Google, the browser or the hosting environment blocks a live request, the corresponding workbook snapshot remains available and is labelled Snapshot.</p><div class="status-list">${content}</div><div class="source-modal-actions"><button class="pill-action" onclick="closeModal();refreshSources(true)"><svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M5 9a7 7 0 0 1 12-2l3 5M4 12l3 5a7 7 0 0 0 12-2"/></svg> &nbsp;Refresh all sources</button></div>`);
