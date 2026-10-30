@@ -205,6 +205,39 @@
 
   .resource-layout.has-no-other-publications{grid-template-columns:minmax(0,1fr)}
   .resource-layout .resource-column[hidden]{display:none!important}
+
+  /* V6 — narrow, screenshot-driven fixes only. */
+  /* Keep the UN decision cards inside their parent container: no 100vw bleed that can create a horizontal page scroll. */
+  .decisions.full-bleed{position:relative;left:auto;width:100%;margin:40px 0 0;padding:38px 24px 34px;}
+  .decision-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;width:100%;max-width:100%;}
+  .decision-card,.decision-card:first-child,.decision-card:last-child{box-sizing:border-box;min-width:0;max-width:100%;padding:5px 15px 10px;overflow-wrap:anywhere;}
+  .decision-card h3,.decision-card p,.decision-card li{min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:normal;hyphens:auto;}
+  .decision-card ul{padding-left:17px;}
+  /* Make all three home actions lift on hover, consistently with the existing primary CTA. */
+  .hero-actions button{transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,border-color .18s ease;will-change:transform;}
+  .hero-actions button:hover,.hero-actions button:focus-visible{transform:translateY(-3px);box-shadow:0 9px 20px rgba(0,20,40,.22);}
+  .hero-actions button:active{transform:translateY(-1px);}
+  /* Incident pictograms must sit on the exact centre of their circular buttons. */
+  .incident-btn .incident-icon{position:relative;display:block;place-items:unset;line-height:0;overflow:visible;}
+  .incident-btn .incident-icon svg{position:absolute;left:50%;top:50%;display:block;width:25px;height:25px;margin:0;transform:translate(-50%,-50%);}
+  .incident-btn:hover .incident-icon svg{transform:translate(-50%,-50%);}
+  /* Entry detail fields must grow to their full content height. The table preview's 7.2em clamp is not for modals. */
+  .modal{min-height:0;max-height:90vh;}
+  .modal-content{flex:1 1 auto;min-height:0;max-height:none;overflow:auto;overscroll-behavior:contain;}
+  .detail-grid{align-items:start;grid-auto-rows:auto;}
+  .detail-field{align-self:start;min-height:0;height:auto;overflow:visible;}
+  .detail-field dd{display:block;height:auto;max-height:none;overflow:visible;white-space:pre-line;overflow-wrap:anywhere;}
+  .detail-field .db-cell-text{display:block;height:auto;max-height:none;overflow:visible;white-space:pre-line;line-height:1.6;overflow-wrap:anywhere;}
+  .detail-field img,.db-cell-text img,.ack-content img,.prose img{display:inline-block;max-width:100%;height:auto;vertical-align:middle;border-radius:4px;}
+  .detail-field table,.db-cell-text table{width:100%;border-collapse:collapse;margin:7px 0;}
+  .detail-field th,.detail-field td,.db-cell-text th,.db-cell-text td{border:1px solid #dfe7ee;padding:5px 7px;text-align:left;vertical-align:top;}
+  @media(max-width:760px){
+    .decisions.full-bleed{padding:28px 16px;}
+    .decision-grid{grid-template-columns:1fr;gap:14px;}
+    .decision-card,.decision-card:first-child,.decision-card:last-child{border-right:0;border-bottom:1px solid #e7edf2;padding:8px 0 15px;}
+    .decision-card:last-child{border-bottom:0;}
+  }
+
 </style>
 </head>
 <body>
@@ -311,7 +344,7 @@
           </div>
         </div>
         <div class="tab-panel" id="home-tab-contributions">
-          <div class="section-kicker">Contributions</div><h2 class="section-title">Organizations contributing to this work</h2><p class="section-intro">The following organizations and networks are listed in the Portal's contributions worksheet.</p><div class="contribution-grid" id="contributions-content"><div class="contribution-card">Loading contribution data…</div></div>
+          <div class="contribution-grid" id="contributions-content"><div class="contribution-card">Loading contribution data…</div></div>
         </div>
         <div class="tab-panel" id="home-tab-acknowledgements">
           <h2 class="section-title ack-page-title">Acknowledgements</h2><div class="ack-list" id="acknowledgements-content"><div class="ack-card">Loading acknowledgements…</div></div>
@@ -564,12 +597,67 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
     function esc(value){return String(value??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
     function rich(value){
       let raw=String(value??'').replace(/\[hyperlink:\s*(https?:\/\/[^\]\s]+)\]/gi,'$1');
-      const links=[];
-      raw=raw.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,(_m,label,url)=>{const token=`__UNIDIR_LINK_${links.length}__`;links.push(`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`);return token;});
-      const urlRe=/(https?:\/\/[^\s<>"']+)/g;let out='',last=0,m;
-      while((m=urlRe.exec(raw))!==null){out+=esc(raw.slice(last,m.index));let url=m[0].replace(/[),.;]+$/,'');let trail=m[0].slice(url.length);out+=`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(url)}</a>${esc(trail)}`;last=m.index+m[0].length;}
-      out+=esc(raw.slice(last));out=out.replace(/\r\n/g,'\n').replace(/\n/g,'<br>');
-      links.forEach((html,i)=>{out=out.replace(`__UNIDIR_LINK_${i}__`,html);});return out;
+      // Decode spreadsheet-escaped markup once, then pass it through the allow-list sanitizer below.
+      if(/&lt;\/?[a-z][^&]*&gt;/i.test(raw)){
+        const decoder=document.createElement('textarea');decoder.innerHTML=raw;raw=decoder.value;
+      }
+      raw=raw.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,(_m,label,url)=>`<a href="${esc(url)}">${label}</a>`);
+      if(!window.DOMParser)return esc(raw).replace(/\r\n?/g,'\n').replace(/\n/g,'<br>');
+      const doc=new DOMParser().parseFromString(`<body>${raw}</body>`,'text/html');
+      const allowed=new Set(['a','abbr','b','blockquote','br','caption','code','del','div','em','h1','h2','h3','h4','h5','h6','hr','i','img','li','ol','p','pre','s','small','span','strong','sub','sup','table','tbody','td','tfoot','th','thead','tr','u','ul']);
+      const removed=new Set(['script','style','iframe','object','embed','form','input','button','textarea','select','option','svg','math','video','audio','source','link','meta']);
+      const safeUrl=(value,allowMailto=false)=>{
+        const v=String(value||'').trim();
+        if(!v)return '';
+        try{const u=new URL(v,window.location.href);const ok=allowMailto?['http:','https:','mailto:'].includes(u.protocol):['http:','https:'].includes(u.protocol);return ok?u.href:'';}catch(_){return '';}
+      };
+      const textHtml=(value,insideAnchor=false)=>{
+        const text=String(value||'');
+        if(insideAnchor)return esc(text).replace(/\r\n?/g,'\n').replace(/\n/g,'<br>');
+        const urlRe=/https?:\/\/[^\s<>"']+/g;let out='',last=0,m;
+        while((m=urlRe.exec(text))!==null){
+          out+=esc(text.slice(last,m.index)).replace(/\r\n?/g,'\n').replace(/\n/g,'<br>');
+          const clean=m[0].replace(/[),.;!?]+$/,'');const trail=m[0].slice(clean.length);const href=safeUrl(clean);
+          out+=href?`<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(clean)}</a>`:esc(clean);
+          out+=esc(trail);last=m.index+m[0].length;
+        }
+        out+=esc(text.slice(last)).replace(/\r\n?/g,'\n').replace(/\n/g,'<br>');
+        return out;
+      };
+      const serialize=node=>{
+        if(node.nodeType===3)return textHtml(node.nodeValue||'');
+        if(node.nodeType!==1)return '';
+        const tag=node.tagName.toLowerCase();
+        if(removed.has(tag))return '';
+        const children=[...node.childNodes].map(serialize).join('');
+        if(!allowed.has(tag))return children;
+        if(tag==='a'){
+          const href=safeUrl(node.getAttribute('href'),true);
+          return href?`<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${children}</a>`:children;
+        }
+        if(tag==='img'){
+          const src=safeUrl(node.getAttribute('src'));
+          if(!src)return '';
+          const alt=esc(node.getAttribute('alt')||node.getAttribute('title')||'');
+          const title=node.getAttribute('title')?` title="${esc(node.getAttribute('title'))}"`:'';
+          return `<img src="${esc(src)}" alt="${alt}"${title} loading="lazy" decoding="async">`;
+        }
+        if(tag==='br'||tag==='hr')return `<${tag}>`;
+        if(tag==='td'||tag==='th'){
+          const colspan=Math.max(1,Math.min(20,parseInt(node.getAttribute('colspan')||'1',10)||1));
+          const rowspan=Math.max(1,Math.min(50,parseInt(node.getAttribute('rowspan')||'1',10)||1));
+          return `<${tag}${colspan>1?` colspan="${colspan}"`:''}${rowspan>1?` rowspan="${rowspan}"`:''}>${children}</${tag}>`;
+        }
+        return `<${tag}>${children}</${tag}>`;
+      };
+      return [...doc.body.childNodes].map(serialize).join('');
+    }
+    function externalHref(value){
+      const raw=String(value??'').trim();if(!raw)return '';
+      const direct=raw.match(/^https?:\/\/[^\s<>"']+/i);if(direct)return direct[0].replace(/[),.;]+$/,'');
+      const markdown=raw.match(/^\s*\[[^\]]*\]\((https?:\/\/[^)\s]+)\)\s*$/i);if(markdown)return markdown[1];
+      if(window.DOMParser){const doc=new DOMParser().parseFromString(raw,'text/html');const a=doc.querySelector('a[href]');if(a){const href=a.getAttribute('href')||'';return /^https?:\/\//i.test(href)?href:'';}}
+      return '';
     }
     function getSnapshotCounts(){return {sources:rows('dataSources').length,ews:rows('earlyWarning').length,progress:rows('progress').length,resources:rows('resources').filter(r=>field(r,'Title')).length};}
     function navigate(page,homeTab){
@@ -588,7 +676,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
 
     function renderContributions(){
       const list=rows('homeContributions');const defs=[['Partner organizations','Partner organizations'],['Case Study partners','Case study partners'],['Community of practice partners','Community of practice partners']];
-      document.getElementById('contributions-content').innerHTML=defs.map(([key,title])=>{const values=list.map(r=>field(r,key)).filter(Boolean);return `<article class="contribution-card"><h3>${esc(title)}</h3>${values.map(v=>`<span class="org-chip ${v==='[TBD]'?'placeholder':''}">${v==='[TBD]'?'Partner to be confirmed':esc(v)}</span>`).join('')||'<p class="section-intro">No entries listed.</p>'}</article>`;}).join('');
+      document.getElementById('contributions-content').innerHTML=defs.map(([key,title])=>{const values=list.map(r=>field(r,key)).filter(Boolean);return `<article class="contribution-card"><h3>${esc(title)}</h3>${values.map(v=>`<span class="org-chip ${v==='[TBD]'?'placeholder':''}">${v==='[TBD]'?'Partner to be confirmed':rich(v)}</span>`).join('')||'<p class="section-intro">No entries listed.</p>'}</article>`;}).join('');
     }
     function renderAcknowledgements(){
       const list=rows('homeAcknowledgments').filter(r=>firstField(r,['Sub-Heading','Heading'])||field(r,'Content'));
@@ -596,7 +684,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
       document.getElementById('acknowledgements-content').innerHTML=list.map(r=>{
         const group=field(r,'Heading');
         const title=field(r,'Sub-Heading')||((group==='Disclaimer')?'Disclaimer':group);
-        return `<article class="ack-card"><div class="ack-card-top"><span class="ack-card-icon">${svgIcon(iconByHeading[group]||'info',17)}</span><h3>${esc(title)}</h3></div><div class="ack-content">${rich(field(r,'Content'))}</div></article>`;
+        return `<article class="ack-card"><div class="ack-card-top"><span class="ack-card-icon">${svgIcon(iconByHeading[group]||'info',17)}</span><h3>${rich(title)}</h3></div><div class="ack-content">${rich(field(r,'Content'))}</div></article>`;
       }).join('');
     }
 
@@ -610,7 +698,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
     const PROGRESS_ICONS={Data:'database',Capacity:'book',Policy:'scale',Partnerships:'handshake'};
     function renderProgress(){
       const all=rows('progress');const groups=[];all.forEach((r,i)=>{const label=field(r,'Heading')||'Other';let g=groups.find(x=>x.label===label);if(!g){g={label,tag:field(r,'Heading Icon')||label,items:[]};groups.push(g);}g.items.push({row:r,index:i});});
-      document.getElementById('progress-groups').innerHTML=groups.map(g=>`<section class="progress-group"><div class="group-head"><span class="group-tag">${esc(g.tag)}</span><h2>${esc(g.label)}</h2></div><div class="progress-cards">${g.items.map(({row,index})=>{const title=field(row,'Title')||'Initiative';const desc=field(row,'Short description');const icon=PROGRESS_ICONS[g.tag]||'ph-sparkle';const hasDetail=field(row,'Content')&&field(row,'Content')!=='[]';return `<button class="progress-card" onclick="openProgress(${index})"><span class="progress-plus">${hasDetail?'+':'↗'}</span><span class="progress-icon">${svgIcon(icon,19)}</span><h3>${esc(title)}</h3><p>${esc(desc||'Case studies to follow.')}</p></button>`;}).join('')}</div></section>`).join('');
+      document.getElementById('progress-groups').innerHTML=groups.map(g=>`<section class="progress-group"><div class="group-head"><span class="group-tag">${esc(g.tag)}</span><h2>${rich(g.label)}</h2></div><div class="progress-cards">${g.items.map(({row,index})=>{const title=field(row,'Title')||'Initiative';const desc=field(row,'Short description');const icon=PROGRESS_ICONS[g.tag]||'ph-sparkle';const hasDetail=field(row,'Content')&&field(row,'Content')!=='[]';return `<button class="progress-card" onclick="openProgress(${index})"><span class="progress-plus">${hasDetail?'+':'↗'}</span><span class="progress-icon">${svgIcon(icon,19)}</span><h3>${rich(title)}</h3><p>${rich(desc||'Case studies to follow.')}</p></button>`;}).join('')}</div></section>`).join('');
     }
     function openProgress(index){const row=rows('progress')[index];const title=field(row,'Title')||'Initiative';const detail=field(row,'Content');const body=detail&&detail!=='[]'?`<p>${rich(detail)}</p>`:`<p>${rich(field(row,'Short description')||'Case studies to follow.')}</p><div class="fit-box"><p style="margin:0">Additional case-study details have not yet been supplied in the current worksheet.</p></div>`;openModal(title,`<div class="micro-label">${esc(field(row,'Heading'))}</div>${body}`);}
 
@@ -666,15 +754,15 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
       const publications=all.filter(r=>category(r)==='UNIDIR PUBLICATIONS'&&hasTitle(r));
       const other=all.filter(r=>category(r)==='OTHER PUBLICATIONS'&&hasTitle(r));
       const events=all.filter(r=>category(r)==='EVENTS'&&hasTitle(r));
-      const resourceCard=r=>`<article class="resource-card"><span class="resource-icon">${svgIcon('book',19)}</span><div><h3>${esc(field(r,'Title'))}</h3><div class="sub">${esc(field(r,'Sub-title'))}</div><p>${rich(field(r,'Description'))}</p></div>${field(r,'Hyperlink')?`<a class="resource-open" href="${esc(field(r,'Hyperlink'))}" target="_blank" rel="noopener noreferrer" aria-label="Open resource">${svgIcon('external',16)}</a>`:''}</article>`;
+      const resourceCard=r=>`<article class="resource-card"><span class="resource-icon">${svgIcon('book',19)}</span><div><h3>${rich(field(r,'Title'))}</h3><div class="sub">${rich(field(r,'Sub-title'))}</div><p>${rich(field(r,'Description'))}</p></div>${externalHref(field(r,'Hyperlink'))?`<a class="resource-open" href="${esc(externalHref(field(r,'Hyperlink')))}" target="_blank" rel="noopener noreferrer" aria-label="Open resource">${svgIcon('external',16)}</a>`:''}</article>`;
       document.getElementById('unidir-resources').innerHTML=publications.map(resourceCard).join('');
       document.getElementById('other-resources').innerHTML=other.length?other.map(resourceCard).join(''):'';const otherColumn=document.querySelector('#page-resources .resource-column.other');if(otherColumn)otherColumn.hidden=!other.length;const resourceLayout=document.querySelector('#page-resources .resource-layout');if(resourceLayout)resourceLayout.classList.toggle('has-no-other-publications',!other.length);
       const youtubeId=url=>{const value=String(url||'');const match=value.match(/(?:youtube(?:-nocookie)?\.com\/(?:watch\?(?:[^#]*&)?v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/i);return match?match[1]:'';};
       const eventCard=r=>{
-        const link=field(r,'Hyperlink');const videoId=youtubeId(link);
+        const link=externalHref(field(r,'Hyperlink'));const videoId=youtubeId(link);
         const video=videoId?`<div class="event-video"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="${esc(field(r,'Title'))} — event recording" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`:'';
         const action=link?`<a class="small-action event-link" href="${esc(link)}" target="_blank" rel="noopener noreferrer">${videoId?'Watch recording':'View event'} ${svgIcon('external',12)}</a>`:'';
-        return `<article class="event-card"><div class="event-card-head"><span class="resource-icon">${svgIcon('calendar',19)}</span><div><div class="event-kicker">Event</div><h3>${esc(field(r,'Title'))}</h3><div class="sub">${esc(field(r,'Sub-title'))}</div></div></div><p>${rich(field(r,'Description'))}</p>${video}${action}</article>`;
+        return `<article class="event-card"><div class="event-card-head"><span class="resource-icon">${svgIcon('calendar',19)}</span><div><div class="event-kicker">Event</div><h3>${rich(field(r,'Title'))}</h3><div class="sub">${rich(field(r,'Sub-title'))}</div></div></div><p>${rich(field(r,'Description'))}</p>${video}${action}</article>`;
       };
       document.getElementById('events-grid').innerHTML=events.length?events.map(eventCard).join(''):`<div class="empty-publications">No events are currently listed in the source worksheet.</div>`;
       const eventsHeading=document.querySelector('#page-resources .events-heading');
@@ -722,18 +810,13 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
       const tables=[...doc.querySelectorAll('table')];
       const cellValue=cell=>{
         if(!cell)return '';
-        const link=cell.querySelector('a[href]');
-        const href=link?.getAttribute('href')||'';
-        if(link&&/^https?:\/\//i.test(href)){
-          const label=(link.textContent||'').trim()||href;
-          return `[${label}](${href})`;
-        }
-        return String(cell.textContent||'').trim();
+        // Keep inline markup, hyperlinks, line breaks and images. rich() later sanitizes it.
+        const html=String(cell.innerHTML||'').trim();
+        return html||String(cell.textContent||'').trim();
       };
       for(const table of tables){
         const trs=[...table.querySelectorAll('tr')];if(trs.length<2)continue;
         const cellsOf=tr=>[...tr.querySelectorAll('th,td')].filter(c=>!c.classList.contains('row-headers-background')&&!c.classList.contains('row-headers')&&!c.classList.contains('row-header-wrapper'));
-        // Published Sheets may add a blank row-number cell before the worksheet columns.
         let headerIndex=-1,headers=[];
         for(let ri=0;ri<Math.min(3,trs.length);ri++){
           const candidate=cellsOf(trs[ri]).map((c,i)=>cleanHeader(c.textContent,i));
@@ -744,7 +827,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
         trs.slice(headerIndex+1).forEach(tr=>{
           const cells=cellsOf(tr);const obj={};
           headers.forEach((h,i)=>{if(!/^__blank_/.test(h))obj[h]=cellValue(cells[i]);});
-          if(Object.values(obj).some(v=>String(v??'').trim()!==''))results.push(obj);
+          if(Object.values(obj).some(v=>String(v??'').replace(/<[^>]*>/g,'').trim()!==''))results.push(obj);
         });
         if(results.length)return results;
       }
