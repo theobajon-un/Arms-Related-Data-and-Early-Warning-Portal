@@ -43,7 +43,7 @@
     @media(min-width:801px) and (max-width:1000px){.brand img{width:124px}.brand-title{font-size:11px;max-width:145px}.source-button{display:none}.main-nav{gap:12px}.nav-btn{font-size:11px}}
 
   
-    /* V3 visual refinement — Counter-IED Compendium typography, palette and proportions. */
+    /* Typography, palette and proportions. */
     :root{--navy:#1a2b3c;--navy-2:#26384c;--blue:#009edb;--blue-2:#009edb;--sky:#eaf5fc;--pale:#f4f7fa;--ink:#233247;--muted:#687789;--line:#dfe6ed;--shadow:0 8px 24px rgba(26,43,60,.07)}
     body{background:#f4f7fa;font-family:Archivo,"Helvetica Neue",Arial,sans-serif}
     .page{background:#f4f7fa}
@@ -144,7 +144,7 @@
     @media(max-width:520px){.status-row{grid-template-columns:minmax(0,1fr) auto;gap:8px}.status-open{grid-column:1/-1;justify-self:start;margin-top:2px}}
 
   
-  /* V5 targeted layout and usability refinements. Existing design tokens and parsers are unchanged. */
+  /* Layout and usability refinements. */
   .decision-grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
   .decision-card{min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:normal}
   .decision-card h3{min-width:0;overflow-wrap:anywhere;hyphens:auto;line-height:1.45}
@@ -206,18 +206,18 @@
   .resource-layout.has-no-other-publications{grid-template-columns:minmax(0,1fr)}
   .resource-layout .resource-column[hidden]{display:none!important}
 
-  /* V6 — narrow, screenshot-driven fixes only. */
-  /* Keep the UN decision cards inside their parent container: no 100vw bleed that can create a horizontal page scroll. */
+  /* Screenshot-driven fixes. */
+  /* UN decision cards inside their parent container: no 100vw bleed that can create a horizontal page scroll. */
   .decisions.full-bleed{position:relative;left:auto;width:100%;margin:40px 0 0;padding:38px 24px 34px;}
   .decision-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;width:100%;max-width:100%;}
   .decision-card,.decision-card:first-child,.decision-card:last-child{box-sizing:border-box;min-width:0;max-width:100%;padding:5px 15px 10px;overflow-wrap:anywhere;}
   .decision-card h3,.decision-card p,.decision-card li{min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:normal;hyphens:auto;}
   .decision-card ul{padding-left:17px;}
-  /* Make all three home actions lift on hover, consistently with the existing primary CTA. */
+  /* All three home actions lift on hover, consistently with the existing primary CTA. */
   .hero-actions button{transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,border-color .18s ease;will-change:transform;}
   .hero-actions button:hover,.hero-actions button:focus-visible{transform:translateY(-3px);box-shadow:0 9px 20px rgba(0,20,40,.22);}
   .hero-actions button:active{transform:translateY(-1px);}
-  /* Incident pictograms must sit on the exact centre of their circular buttons. */
+  /* Incident pictograms sit on the exact centre of their circular buttons. */
   .incident-btn .incident-icon{position:relative;display:block;place-items:unset;line-height:0;overflow:visible;}
   .incident-btn .incident-icon svg{position:absolute;left:50%;top:50%;display:block;width:25px;height:25px;margin:0;transform:translate(-50%,-50%);}
   .incident-btn:hover .incident-icon svg{transform:translate(-50%,-50%);}
@@ -270,7 +270,7 @@
   </header>
 
   <main>
-    <!-- HOME: Background / Contributions / Acknowledgements are sub-pages in this section, per the PowerPoint review note. -->
+    <!-- HOME: Background / Contributions / Acknowledgements are sub-pages in this section. -->
     <section class="page active" id="page-home">
       <div class="hero home-hero">
         <div class="container hero-inner">
@@ -352,8 +352,8 @@
       </div>
     </section>
 
-    <!-- V4: explicit per-worksheet GIDs, strict signatures, HTML/CSV/GViz/JSONP parsers, and inline SVG icon fallbacks. -->
-    <!-- HOW IT WORKS: the six fictional incident examples and the interactive four-stage process follow the supplied mock-up. -->
+    <!-- Explicit per-worksheet GIDs, strict signatures, HTML/CSV/GViz/JSONP parsers, and inline SVG icon fallbacks. -->
+    <!-- The six fictional incident examples and the interactive four-stage process. -->
     <section class="page" id="page-how">
       <div class="hero compact"><div class="container hero-inner"><div class="hero-title-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="2.5" width="8" height="5" rx="1.5"/><rect x="1.5" y="16.5" width="8" height="5" rx="1.5"/><rect x="14.5" y="16.5" width="8" height="5" rx="1.5"/><path d="M12 7.5v4m-6.5 5v-2.5h13V16.5M12 11.5H5.5m6.5 0h6.5"/></svg></div><h1>Where arms-related data fits in the early-warning process</h1><p>Follow the four stages of early warning. Arms-related data is most relevant at the collection and analysis stages.</p></div></div>
       <div class="container shell">
@@ -493,8 +493,7 @@
 
   <script>
     // Published worksheet IDs supplied in the latest UNIDIR source links.
-    // Progress Case Studies uses 1014059213, the original worksheet GID supplied at project start;
-    // all six other GIDs below were explicitly supplied in the latest message.
+    // Progress Case Studies uses 1014059213, the original worksheet GID;
     const PUBLISHED_SHEET_ID = '2PACX-1vSfBtwyhDD7WKXWBz-0sCgzEPt4y-oxWYCzHRM6b9wewQcW3TEjqhX7rmsJVXPpig';
     const PUBLISHED_BASE = `https://docs.google.com/spreadsheets/d/e/${PUBLISHED_SHEET_ID}`;
     const PUBLISHED_TAB_GIDS = {
