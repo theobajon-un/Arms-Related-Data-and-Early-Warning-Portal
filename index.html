@@ -257,6 +257,43 @@
   .db-meta-actions button{font-size:12px}
   @media(max-width:760px){.decision-grid{grid-template-columns:1fr}.main-nav{gap:8px}.decision-card{border-right:0;border-bottom:1px solid #e7edf2;padding:8px 0 15px}.hero.compact h1{white-space:normal}}
 
+
+
+    /* Targeted colleague feedback: increase small text sizes without changing layout hierarchy. */
+    body{font-size:15px}
+    :is(.utility,.eyebrow,.hero p,.hero .subtitle,.section-kicker,.section-intro,.help-card p,.help-card strong,
+      .decision-card h3,.decision-card p,.decision-card li,.center-kicker,.citation-text,.small-action,.tab-btn,
+      .contribution-card h3,.org-chip,.ack-card .subhead,.ack-card p,.incident-btn>span,.micro-label,
+      .stage-body p,.fit-box p,.pill-action,.case-card p,.stage-step strong,.stage-step p,.progress-empty,
+      .group-tag,.progress-card p,.db-controls input,.db-controls select,.db-controls button,.db-meta,
+      .db-table th,.db-table td,.pagination,.pager-actions button,.methodology p,.definitions-toggle,
+      .definition-item strong,.definition-item p,.resource-card .sub,.resource-card p,.event-kicker,
+      .event-card p,.footer-muted,.footer-kicker,.footer-nav button,.footer-nav a,.footer-contact,
+      .footer-bottom,.modal-content,.detail-field dt,.detail-field dd,.status-row,.status-open){
+      font-size:max(12px,1em)!important;
+    }
+    /* Resources: a stronger, more visible Events heading with a clear UNIDIR blue treatment. */
+    .events-heading{
+      display:flex;align-items:center;gap:10px;
+      padding:13px 18px;margin:34px 0 8px!important;
+      border-radius:8px;border-left:5px solid #8ed2f3;
+      background:linear-gradient(100deg,#1a2b3c 0%,#146b9e 62%,#009edb 100%);
+      color:#fff!important;font-size:19px!important;font-weight:800;letter-spacing:.12em;
+      line-height:1.25;text-transform:uppercase;box-shadow:0 4px 12px rgba(26,43,60,.12);
+    }
+    .events-heading .resource-count{background:rgba(255,255,255,.2);color:#fff;min-width:25px;height:25px;margin-left:2px}
+    /* Keep the 2024 conference card at its content height instead of stretching to the video card. */
+    .events-grid{align-items:start}
+    .event-card{height:auto;align-self:start}
+    .event-card-compact{padding:15px 17px;gap:7px}
+    .event-card-compact h3{margin-bottom:4px}
+    .event-card-compact p{font-size:12px;line-height:1.55}
+
+    /* Extend the legibility floor to remaining metadata and compact interface labels. */
+    :is(.audience-item,.audience-item strong,.audience-label,.audience-card h3,.audience-card p,
+      .resource-count,.tag,.note-ref,.value-flag,.event-card .sub,.cta small,.empty-publications,
+      .policy-updated,.db-result-count,.db-page-info,small){font-size:max(12px,1em)!important}
+    .note-ref{min-width:18px;height:18px;padding:0 5px}
 </style>
 </head>
 <body>
@@ -408,14 +445,14 @@
     <section class="page" id="page-databases">
       <div class="hero compact"><div class="container hero-inner"><div class="hero-title-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div><h1>Arms and early warning databases</h1><p>Explore two databases of (i) arms-related data sources and (ii) early-warning initiatives and systems.</p></div></div>
       <div class="container shell">
-        <div class="db-intro db-intro-clean"><div class="db-switch"><button class="db-tab active" id="db-tab-sources" onclick="setDbTab('sources')">Mapping of Arms-Related Data</button><button class="db-tab" id="db-tab-ews" onclick="setDbTab('ews')">Mapping of Early-Warning Initiatives</button></div></div>
+        <div class="db-intro db-intro-clean"><div class="db-switch"><button class="db-tab active" id="db-tab-sources" onclick="setDbTab('sources')">Database of Arms-Related Data</button><button class="db-tab" id="db-tab-ews" onclick="setDbTab('ews')">Database of Early-Warning Initiatives</button></div></div>
         
         <div class="db-meta"><span id="db-result-count">Loading database…</span><div class="db-meta-actions"><button onclick="exportDatabaseCsv()"><i class="ph ph-download-simple"></i> Export CSV</button></div></div>
         <div class="table-wrap"><table class="db-table"><thead id="db-head"></thead><tbody id="db-body"><tr><td>Loading database…</td></tr></tbody></table></div>
         <div class="pagination"><span id="db-page-info"></span><div class="pager-actions"><button id="db-prev" onclick="changeDatabasePage(-1)">← Previous</button><button id="db-next" onclick="changeDatabasePage(1)">Next →</button></div></div>
-        <div class="methodology"><div class="section-kicker">Notes and methodology</div><h2>How these mappings were compiled</h2><p>The lists of arms-related data sources and key early-warning initiatives were reviewed by participating experts during the 2024 International Conference and finalized by experts from UNIDIR, CAR, PRIO and Uppsala University. They are living, working tools.</p><p>Both data sources are primarily based on publicly accessible information. Items in brackets “[]” indicate uncertainty or limited public information and hence are “best estimates” by experts from UNIDIR, CAR, PRIO and Uppsala University, based on available information. Arms and ammunition-related data sources are limited to sources that release databases and regular reports.</p><p>Should you identify any inaccurate or incomplete information, or you wish to provide feedback, please contact <a href="mailto:cap-unidir@un.org">cap-unidir@un.org</a>. Requests for inclusion of additional sources or initiatives in the mapping are particularly encouraged.</p><p class="update-note">Latest update: March 2025.</p></div>
-        <div class="methodology"><div class="definitions-head"><div><div class="section-kicker">Reference guide</div><h2 style="margin:0">Database field definitions</h2><p style="margin:6px 0 0">Definitions {1}–{21} correspond to the numbered fields used in the two mappings.</p></div><button class="definitions-toggle" onclick="toggleDefinitions()" id="definitions-toggle">＋ Show definitions</button></div><div class="definitions-grid" id="definitions-grid"></div></div>
-        <div class="cta"><div><strong>Want your arms data or early-warning initiative to be featured in the database?</strong><small>Get in touch: cap-unidir@un.org</small></div><a class="cta-arrow" href="mailto:cap-unidir@un.org?subject=Database%20inclusion%20request" aria-label="Contact UNIDIR"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
+        <div class="methodology"><div class="section-kicker">Notes and methodology</div><h2>How these databases were compiled</h2><p>The lists of arms-related data sources and key early-warning initiatives were reviewed by participating experts during the 2024 International Conference and finalized by experts from UNIDIR, CAR, PRIO and Uppsala University. They are living, working tools.</p><p>Both data sources are primarily based on publicly accessible information. Items in brackets “[]” indicate uncertainty or limited public information and hence are “best estimates” by experts from UNIDIR, CAR, PRIO and Uppsala University, based on available information. Arms and ammunition-related data sources are limited to sources that release databases and regular reports.</p><p>Should you identify any inaccurate or incomplete information, or you wish to provide feedback, please contact <a href="mailto:cap-unidir@un.org">cap-unidir@un.org</a>. Requests for inclusion of additional sources or initiatives in the databases are particularly encouraged.</p><p class="update-note">Latest update: March 2025.</p></div>
+        <div class="methodology"><div class="definitions-head"><div><div class="section-kicker">Reference guide</div><h2 style="margin:0">Database field definitions</h2><p style="margin:6px 0 0">Definitions {1}–{21} correspond to the numbered fields used in the two databases.</p></div><button class="definitions-toggle" onclick="toggleDefinitions()" id="definitions-toggle">＋ Show definitions</button></div><div class="definitions-grid" id="definitions-grid"></div></div>
+        <div class="cta"><div><strong>Want your arm&#x73;-related data or early-warning initiative to be featured in the database?</strong><small>Get in touch: cap-unidir@un.org</small></div><a class="cta-arrow" href="mailto:cap-unidir@un.org?subject=Database%20inclusion%20request" aria-label="Contact UNIDIR"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
       </div>
     </section>
 
@@ -437,7 +474,7 @@
         <article class="policy-card">
           <p>This Portal is operated by the United Nations Institute for Disarmament Research (UNIDIR). UNIDIR respects the privacy of people who access and use its online resources.</p>
           <h2>Information collected through this Portal</h2>
-          <p>The Portal is an informational resource. It does not provide user accounts, registration, or a contribution form. Browsing its pages does not ask users to submit personal information. The Portal loads publicly published spreadsheet content from Google Sheets to display the mappings and supporting materials. Requests to Google are subject to Google's own privacy and service terms.</p>
+          <p>The Portal is an informational resource. It does not provide user accounts, registration, or a contribution form. Browsing its pages does not ask users to submit personal information. The Portal loads publicly published spreadsheet content from Google Sheets to display the databases and supporting materials. Requests to Google are subject to Google's own privacy and service terms.</p>
           <h2>Contacting UNIDIR</h2>
           <p>Where users choose to contact UNIDIR by email or through an external service, information they provide is handled through the relevant communication channel and in accordance with applicable United Nations policies.</p>
           <h2>External websites and embedded content</h2>
@@ -725,7 +762,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
     function setDbTab(tab){dbTab=tab;dbPage=1;dbSort={key:'',dir:1};dbFilters={};document.getElementById('db-tab-sources').classList.toggle('active',tab==='sources');document.getElementById('db-tab-ews').classList.toggle('active',tab==='ews');renderDatabase();}
     function databaseConfig(){
       const key=dbTab==='sources'?'dataSources':'earlyWarning';
-      const name=dbTab==='sources'?'Mapping of Arms-Related Data':'Mapping of Early-Warning Initiatives';
+      const name=dbTab==='sources'?'Database of Arms-Related Data':'Database of Early-Warning Initiatives';
       const data=rows(key);const columns=Object.keys(data[0]||{}).filter(k=>k&&!/^__blank_/i.test(k)&&!/^__parsed_extra/i.test(k));
       return {key,name,pageSize:7,columns,filters:[]};
     }
@@ -779,7 +816,8 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
         const link=externalHref(field(r,'Hyperlink'));const videoId=youtubeId(link);
         const video=videoId?`<div class="event-video"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="${esc(field(r,'Title'))} — event recording" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`:'';
         const action=link?`<a class="small-action event-link" href="${esc(link)}" target="_blank" rel="noopener noreferrer">${videoId?'Watch recording':'View event'} ${svgIcon('external',12)}</a>`:'';
-        return `<article class="event-card"><div class="event-card-head"><span class="resource-icon">${svgIcon('calendar',19)}</span><div><div class="event-kicker">Event</div><h3>${rich(field(r,'Title'))}</h3><div class="sub">${rich(field(r,'Sub-title'))}</div></div></div><p>${rich(field(r,'Description'))}</p>${video}${action}</article>`;
+        const compactEvent=/2024 International Conference/i.test(field(r,'Title'));
+        return `<article class="event-card${compactEvent?' event-card-compact':''}"><div class="event-card-head"><span class="resource-icon">${svgIcon('calendar',19)}</span><div><div class="event-kicker">Event</div><h3>${rich(field(r,'Title'))}</h3><div class="sub">${rich(field(r,'Sub-title'))}</div></div></div><p>${rich(field(r,'Description'))}</p>${video}${action}</article>`;
       };
       document.getElementById('events-grid').innerHTML=events.length?events.map(eventCard).join(''):`<div class="empty-publications">No events are currently listed in the source worksheet.</div>`;
       const eventsHeading=document.querySelector('#page-resources .events-heading');
