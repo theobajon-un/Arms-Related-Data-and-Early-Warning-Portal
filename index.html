@@ -294,6 +294,12 @@
       .resource-count,.tag,.note-ref,.value-flag,.event-card .sub,.cta small,.empty-publications,
       .policy-updated,.db-result-count,.db-page-info,small){font-size:max(12px,1em)!important}
     .note-ref{min-width:18px;height:18px;padding:0 5px}
+
+    /* Spreadsheet emphasis: preserve the source sheet's blue cue in a restrained UNIDIR treatment. */
+    .sheet-blue{color:#087fae!important;font-weight:600;background:linear-gradient(transparent 72%,rgba(0,158,219,.15) 72%);-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .06em;border-radius:2px}
+    .sheet-blue-block{display:block;background:#eef7fc;border-left:3px solid #009edb;border-radius:0 5px 5px 0;padding:7px 11px;margin:7px 0;line-height:1.65}
+    .sheet-blue-block p{color:inherit!important;margin:0 0 7px}
+    .sheet-blue-block p:last-child{margin-bottom:0}
 </style>
 </head>
 <body>
@@ -684,7 +690,12 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
         if(!allowed.has(tag))return children;
         if(tag==='span'){
           const color=String(node.style?.color||'').replace(/\s+/g,'').toLowerCase();
-          if(['blue','#0000ff','rgb(0,0,255)'].includes(color))return `<span style="color:blue">${children}</span>`;
+          // Spreadsheet blue is mapped to a restrained UNIDIR accent, not browser-default pure blue.
+          if(['blue','#0000ff','#00f','rgb(0,0,255)'].includes(color)){
+            const parentTag=node.parentElement?.tagName?.toLowerCase()||'';
+            const blockContext=['p','div','li','blockquote','td','th','section','article'].includes(parentTag);
+            return `<span class="sheet-blue${blockContext?' sheet-blue-block':''}">${children}</span>`;
+          }
           return children;
         }
         if(tag==='a'){
