@@ -354,6 +354,44 @@
       #page-how .flow-arrow-grey{padding-left:10px}
     }
 
+
+
+    /* FINAL MICRO-ADJUSTMENTS: connector alignment, stage spacing, resource hierarchy and home-hero spacing. */
+    /* Centre the transition arrow above the left-hand Stages 3 and 4 response card. */
+    #page-how .flow-arrow-grey{
+      width:calc((100% - 20px)/2);
+      margin-left:0;
+      margin-right:0;
+      padding-left:0;
+      text-align:center;
+    }
+    #page-how .flow-arrow-grey svg{display:block;margin:0 auto;}
+
+    /* Reduce the vertical gap between stage content and the expandable action controls. */
+    #page-how .stage-card{row-gap:4px;}
+    #page-how .stage-card .stage-body{padding-top:12px;padding-bottom:5px;}
+    #page-how .stage-card .stage-fit{padding-top:8px;padding-bottom:6px;}
+    #page-how .stage-card .stage-actions{padding-top:0;padding-bottom:7px;}
+
+    /* Give resource titles a clear typographic lead over authors, dates and descriptions. */
+    #page-resources .resource-card h3,
+    #page-resources .event-card h3{font-size:16px!important;line-height:1.4;font-weight:700;}
+    #page-resources .resource-card .sub,
+    #page-resources .event-card .sub{font-size:12px!important;line-height:1.45;}
+    #page-resources .resource-card p,
+    #page-resources .event-card p{font-size:12px!important;line-height:1.6;}
+
+    /* Tighten the home hero's bottom padding so Intended users follows the subtitle more closely. */
+    #page-home .home-hero{padding-bottom:27px!important;}
+
+    @media(max-width:760px){
+      /* The response card becomes full-width on narrow screens, so centre the arrow in that full width. */
+      #page-how .flow-arrow-grey{width:100%;text-align:center;padding-left:0;}
+    }
+    @media(max-width:520px){
+      #page-home .home-hero{padding-bottom:23px!important;}
+    }
+
 </style>
 </head>
 <body>
@@ -386,6 +424,7 @@
   </header>
 
   <main>
+    <!-- PAGE: HOME — Hero, intended audiences, background, contributions, acknowledgements and institutional references. -->
     <!-- HOME: Background / Contributions / Acknowledgements are sub-pages in this section. -->
     <section class="page active" id="page-home">
       <div class="hero home-hero">
@@ -466,6 +505,7 @@
 
     <!-- Explicit per-worksheet GIDs, strict signatures, HTML/CSV/GViz/JSONP parsers, and inline SVG icon fallbacks. -->
     <!-- The six fictional incident examples and the interactive four-stage process. -->
+    <!-- PAGE: HOW IT WORKS — Incident examples, stages 1–4, explanatory panels and system case studies. -->
     <section class="page" id="page-how">
       <div class="hero compact"><div class="container hero-inner"><div class="hero-title-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="2.5" width="8" height="5" rx="1.5"/><rect x="1.5" y="16.5" width="8" height="5" rx="1.5"/><rect x="14.5" y="16.5" width="8" height="5" rx="1.5"/><path d="M12 7.5v4m-6.5 5v-2.5h13V16.5M12 11.5H5.5m6.5 0h6.5"/></svg></div><h1>How arms-related data works in early warning</h1><p>Follow the four stages of early warning. Arms-related data is most relevant at the collection and analysis stages.</p></div></div>
       <div class="container shell">
@@ -493,6 +533,7 @@
       </div>
     </section>
 
+    <!-- PAGE: PROGRESS — Initiatives grouped by workstream, with expandable case-study details. -->
     <section class="page" id="page-progress">
       <div class="hero compact"><div class="container hero-inner"><div class="hero-title-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V12m5 8V5m5 15v-9m5 9V3"/><path d="m3 9 6-6 5 5 6-6"/></svg></div><h1>Progress incorporating arms-related data</h1><p>Click any of the boxes to learn how organizations are using or exploring cutting-edge processes and technologies to aid the incorporation of arms-related data into early-warning systems.</p></div></div>
       <div class="container shell">
@@ -502,6 +543,7 @@
       </div>
     </section>
 
+    <!-- PAGE: DATABASES — Arms-related data sources and early-warning initiatives, including field definitions. -->
     <section class="page" id="page-databases">
       <div class="hero compact"><div class="container hero-inner"><div class="hero-title-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div><h1>Arms and early warning databases</h1><p>Explore two databases of (i) arms-related data sources and (ii) early-warning initiatives and systems.</p></div></div>
       <div class="container shell">
@@ -515,6 +557,7 @@
       </div>
     </section>
 
+    <!-- PAGE: RESOURCES — UNIDIR publications, other publications and events. -->
     <section class="page" id="page-resources">
       <div class="hero compact"><div class="container hero-inner"><div class="hero-title-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg></div><h1>Resources for practitioners</h1><p>See below publications and events concerning arms-related data and early-warning systems.</p></div></div>
       <div class="container shell">
@@ -527,6 +570,7 @@
       </div>
     </section>
 
+    <!-- LEGAL PAGES — Standalone privacy policy and terms of use. -->
     <section class="page" id="page-privacy">
       <div class="hero compact"><div class="container hero-inner"><div class="hero-title-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3"/></svg></div><h1>Privacy Policy</h1><p>How this Portal handles information and external data services.</p></div></div>
       <div class="container policy-shell">
@@ -560,6 +604,7 @@
     </section>
   </main>
 
+  <!-- SITE FOOTER — UNIDIR identity, navigation, contact channels and legal links. -->
   <footer class="footer">
     <div class="container footer-grid">
       <div>
@@ -699,6 +744,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
       calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/>'
     };
     function svgIcon(name,size=20,extra=''){const path=ICON_PATHS[name]||ICON_PATHS.info;return `<svg class="svg-icon ${extra}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg>`;}
+    // DATA HELPERS — Normalize worksheet headers, retrieve values and render safe rich content.
     function norm(value){return String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');}
     function field(row,name){if(!row)return '';const wanted=norm(name);const key=Object.keys(row).find(k=>norm(k)===wanted);return key?String(row[key]??'').trim():'';}
     function firstField(row,names){for(const name of names){const v=field(row,name);if(v)return v;}return '';}
@@ -780,6 +826,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
       return '';
     }
     function getSnapshotCounts(){return {sources:rows('dataSources').length,ews:rows('earlyWarning').length,progress:rows('progress').length,resources:rows('resources').filter(r=>field(r,'Title')).length};}
+    // NAVIGATION — Switch top-level pages and Home sub-tabs without reloading the portal.
     function navigate(page,homeTab){
       currentPage=page;document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));const target=document.getElementById('page-'+page);if(target)target.classList.add('active');
       document.querySelectorAll('.nav-btn').forEach(el=>el.classList.remove('active'));const nav=document.getElementById('nav-'+page);if(nav)nav.classList.add('active');
@@ -794,6 +841,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
     function closeModal(event){if(event&&event.target!==document.getElementById('modal-backdrop'))return;document.getElementById('modal-backdrop').classList.remove('open');document.body.style.overflow='';}
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
+    // HOME RENDERERS — Populate contributions and acknowledgements from their published worksheets.
     function renderContributions(){
       const list=rows('homeContributions');const defs=[['Partner organizations','Partner organizations'],['Case Study partners','Case study partners']];
       document.getElementById('contributions-content').innerHTML=defs.map(([key,title])=>{const values=list.map(r=>field(r,key)).filter(Boolean);return `<article class="contribution-card"><h3>${esc(title)}</h3>${values.map(v=>`<span class="org-chip ${v==='[TBD]'?'placeholder':''}">${v==='[TBD]'?'Partner to be confirmed':rich(v)}</span>`).join('')||'<p class="section-intro">No entries listed.</p>'}</article>`;}).join('');
@@ -808,6 +856,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
       }).join('');
     }
 
+    // HOW-IT-WORKS RENDERERS — Build interactive incident examples and stage detail panels.
     function renderIncidents(){const row=howRow();document.getElementById('incident-grid').innerHTML=INCIDENTS.map((item,i)=>`<button class="incident-btn" onclick="openIncident(${i})"><span class="incident-icon">${svgIcon(item.icon,25)}</span><span>${esc(item.label)}</span></button>`).join('');
       document.getElementById('how-case-studies').innerHTML=CASES.map(c=>`<button class="case-row" onclick="openCaseStudy('${esc(c.key)}')"><span>${esc(c.label)}</span>${svgIcon('plus',16)}</button>`).join('');
     }
@@ -817,6 +866,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
 
     const PROGRESS_ICONS={Data:'database',Capacity:'book',Policy:'scale',Partnerships:'handshake'};
     const PROGRESS_COLORS={Data:'#009edb',Capacity:'#6a9b52',Policy:'#d29a35',Partnerships:'#8b6bb1'};
+    // PROGRESS RENDERER — Group initiatives and populate expandable case-study cards.
     function renderProgress(){
       const all=rows('progress');const groups=[];all.forEach((r,i)=>{const label=field(r,'Heading')||'Other';let g=groups.find(x=>x.label===label);if(!g){g={label,tag:field(r,'Heading Icon')||label,items:[]};groups.push(g);}g.items.push({row:r,index:i});});
       document.getElementById('progress-groups').innerHTML=groups.map(g=>`<section class="progress-group" style="--group-color:${PROGRESS_COLORS[g.tag]||'#009edb'}"><div class="group-head"><span class="group-tag">${esc(g.tag)}</span><h2>${rich(g.label)}</h2></div><div class="progress-cards">${g.items.map(({row,index})=>{const title=field(row,'Title')||'Initiative';const desc=field(row,'Short description');const icon=PROGRESS_ICONS[g.tag]||'ph-sparkle';const hasDetail=field(row,'Content')&&field(row,'Content')!=='[]';return `<button class="progress-card" onclick="openProgress(${index})"><span class="progress-icon">${svgIcon(icon,19)}</span><h3>${rich(title)}</h3><p>${rich(desc||'Early-warning systems that already integrate arms-related data to follow.')}</p></button>`;}).join('')}</div></section>`).join('');
@@ -831,6 +881,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
       return {key,name,pageSize:Math.max(1,data.length),columns,filters:[]};
     }
     function findHeader(row,header){const n=norm(header);const key=Object.keys(row||{}).find(k=>norm(k)===n);return key||header;}
+    // DATABASE RENDERERS — Build sortable database tables, row details and CSV exports.
     function renderDatabase(){
       const cfg=databaseConfig();dbPageSize=cfg.pageSize;
       const control=document.getElementById('db-controls');if(control)control.innerHTML='';
@@ -865,6 +916,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
     function toggleDefinitions(){const grid=document.getElementById('definitions-grid');const open=grid.classList.toggle('open');document.getElementById('definitions-toggle').textContent=open?'− Hide definitions':'＋ Show definitions';}
     function renderDefinitions(){document.getElementById('definitions-grid').innerHTML=FIELD_DEFINITIONS.map(([n,title,desc])=>`<article class="definition-item" data-number="${n}"><strong>${esc(title)}</strong><p>${esc(desc)}</p></article>`).join('');}
 
+    // RESOURCES RENDERER — Build publication and event cards from the resources worksheet.
     function renderResources(){
       const all=rows('resources');
       const category=r=>field(r,'Heading').replace(/\s+/g,' ').trim().toUpperCase();
@@ -898,6 +950,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
       const content=SOURCE_CONFIG.map(s=>{const st=SOURCE_STATUS[s.key];const label=st.state==='live'?'Live':st.state==='loading'?'Loading':'Snapshot';const cls=st.state==='live'?'status-live':'status-snapshot';const url=`${PUBLISHED_BASE}/pubhtml#gid=${encodeURIComponent(s.gid)}`;return `<div class="status-row"><span>${esc(s.label)}<br><small style="color:#93a0ad;font-weight:400">Tab: ${esc(s.sheetName)} · GID ${esc(s.gid)} · ${esc(st.message||'')}</small></span><span class="${cls}">${label}</span><a class="status-open" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Open sheet ${svgIcon('external',11)}</a></div>`;}).join('');
       openModal('Data-source connections',`<p>Each worksheet has its own explicitly configured published Google Sheets GID. A source is marked Live only after its response matches that worksheet’s required column signature. The source links below open the exact published tab. If Google, the browser or the hosting environment blocks a live request, the corresponding workbook snapshot remains available and is labelled Snapshot.</p><div class="status-list">${content}</div><div class="source-modal-actions"><button class="pill-action" onclick="closeModal();refreshSources(true)"><svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M5 9a7 7 0 0 1 12-2l3 5M4 12l3 5a7 7 0 0 0 12-2"/></svg> &nbsp;Refresh all sources</button></div>`);
     }
+    // GOOGLE SHEETS PARSERS — Convert published CSV, Visualization and HTML worksheet responses into row objects.
     function cleanHeader(h,i){const value=String(h??'').replace(/^\uFEFF/,'').trim();return value||`__blank_${i}`;}
     function parseCsvFallback(text){
       const rows=[];let row=[],cell='',quoted=false;
@@ -1010,6 +1063,7 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
       }catch(error){errors.push(`JSONP: ${error.message}`);}
       throw new Error(`GID ${gid} could not be read. ${errors.join(' | ')}`);
     }
+    // SOURCE REFRESH — Validate each worksheet signature and update only its matching data collection.
     async function refreshSources(manual=false){
       await Promise.all(SOURCE_CONFIG.map(async source=>{try{await refreshOne(source,!manual);}catch(error){SOURCE_STATUS[source.key]={state:'snapshot',message:`Configured GID ${source.gid} · ${error.message}`};console.warn(`[Portal data] ${source.label}:`,error.message);}}));
       updateSourceBadge();renderAll();if(manual)toast('Refresh finished — see source status');
