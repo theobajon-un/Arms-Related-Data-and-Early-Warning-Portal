@@ -144,7 +144,7 @@
     @media(max-width:520px){.status-row{grid-template-columns:minmax(0,1fr) auto;gap:8px}.status-open{grid-column:1/-1;justify-self:start;margin-top:2px}}
 
   
-  /* Layout and usability refinements. */
+  /* Layout and usability. */
   .decision-grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
   .decision-card{min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:normal}
   .decision-card h3{min-width:0;overflow-wrap:anywhere;hyphens:auto;line-height:1.45}
@@ -206,7 +206,6 @@
   .resource-layout.has-no-other-publications{grid-template-columns:minmax(0,1fr)}
   .resource-layout .resource-column[hidden]{display:none!important}
 
-  /* Screenshot-driven fixes. */
   /* UN decision cards inside their parent container: no 100vw bleed that can create a horizontal page scroll. */
   .decisions.full-bleed{position:relative;left:auto;width:100%;margin:40px 0 0;padding:38px 24px 34px;}
   .decision-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;width:100%;max-width:100%;}
@@ -221,7 +220,7 @@
   .incident-btn .incident-icon{position:relative;display:block;place-items:unset;line-height:0;overflow:visible;}
   .incident-btn .incident-icon svg{position:absolute;left:50%;top:50%;display:block;width:25px;height:25px;margin:0;transform:translate(-50%,-50%);}
   .incident-btn:hover .incident-icon svg{transform:translate(-50%,-50%);}
-  /* Entry detail fields must grow to their full content height. The table preview's 7.2em clamp is not for modals. */
+  /* Entry detail fields grow to their full content height. */
   .modal{min-height:0;max-height:90vh;}
   .modal-content{flex:1 1 auto;min-height:0;max-height:none;overflow:auto;overscroll-behavior:contain;}
   .detail-grid{align-items:start;grid-auto-rows:auto;}
@@ -259,7 +258,7 @@
 
 
 
-    /* Targeted colleague feedback: increase small text sizes without changing layout hierarchy. */
+    /* Increase small text sizes without changing layout hierarchy. */
     body{font-size:15px}
     :is(.utility,.eyebrow,.hero p,.hero .subtitle,.section-kicker,.section-intro,.help-card p,.help-card strong,
       .decision-card h3,.decision-card p,.decision-card li,.center-kicker,.citation-text,.small-action,.tab-btn,
@@ -272,7 +271,7 @@
       .footer-bottom,.modal-content,.detail-field dt,.detail-field dd,.status-row,.status-open){
       font-size:max(12px,1em)!important;
     }
-    /* Resources: a stronger, more visible Events heading with a clear UNIDIR blue treatment. */
+    /* Resources: more visible Events heading. */
     .events-heading{
       display:flex;align-items:center;gap:10px;
       padding:13px 18px;margin:34px 0 8px!important;
@@ -295,7 +294,7 @@
       .policy-updated,.db-result-count,.db-page-info,small){font-size:max(12px,1em)!important}
     .note-ref{min-width:18px;height:18px;padding:0 5px}
 
-    /* Spreadsheet emphasis: preserve the source sheet's blue cue in a restrained UNIDIR treatment. */
+    /* Preserve the source sheet's blue cue in a restrained UNIDIR treatment. */
     .sheet-blue{color:#087fae!important;font-weight:600;background:linear-gradient(transparent 72%,rgba(0,158,219,.15) 72%);-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .06em;border-radius:2px}
     .sheet-blue-block{display:block;background:#eef7fc;border-left:3px solid #009edb;border-radius:0 5px 5px 0;padding:7px 11px;margin:7px 0;line-height:1.65}
     .sheet-blue-block p{color:inherit!important;margin:0 0 7px}
@@ -440,7 +439,7 @@
           <div class="audience-cards">
             <article class="audience-card"><span class="audience-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 12 18.3 5.7M12 12V3m0 9 6.4 6.4"/><path d="M12 7a5 5 0 1 0 5 5"/></svg></span><div><h3>Early-warning providers</h3><p>Those collecting, monitoring and analysing information to identify emerging conflict risks.</p></div></article>
             <article class="audience-card"><span class="audience-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span><div><h3>Arms-related data collectors and analysts</h3><p>Those working with arms-related incidents, indicators, data and datasets.</p></div></article>
-            <article class="audience-card"><span class="audience-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-6 9 6M4 10h16M5 10v9m4-9v9m6-9v9m4-9v9M3 21h18"/></svg></span><div><h3>Policymakers, practitioners and researchers</h3><p>Those working in conflict prevention, armed violence reduction, early warning or arms control.</p></div></article>
+            <article class="audience-card"><span class="audience-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-6 9 6M4 10h16M5 10v9m4-9v9m6-9v9m4-9v9M3 21h18"/></svg></span><div><h3>Policymakers, practitioners, researchers</h3><p>Those in conflict prevention, armed violence reduction, early warning or arms control.</p></div></article>
           </div>
         </div>
       </section>
@@ -1073,5 +1072,10 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
       document.getElementById('footer-year').textContent=new Date().getFullYear();renderAll();updateSourceBadge();refreshSources(false);
     });
   </script>
+  <!--
+  Built and coded by Theò Bajon
+  October–November 2026
+  UNIDIR Arms Data and Early Warning Portal
+-->
 </body>
 </html>
