@@ -300,6 +300,60 @@
     .sheet-blue-block{display:block;background:#eef7fc;border-left:3px solid #009edb;border-radius:0 5px 5px 0;padding:7px 11px;margin:7px 0;line-height:1.65}
     .sheet-blue-block p{color:inherit!important;margin:0 0 7px}
     .sheet-blue-block p:last-child{margin-bottom:0}
+
+
+    /* STRUCTURE: targeted spacing, readability, card alignment and continuous database layout. */
+    /* Slightly increase the specified long-form text and card subheadings. */
+    #page-home #tab-panel-background .prose p,
+    #page-home .prose p{font-size:14px;line-height:1.75}
+    #page-home .ack-list .ack-content{font-size:13px;line-height:1.75}
+    #page-home .ack-list .ack-content p{font-size:inherit;line-height:inherit}
+    #page-progress .progress-intro p{font-size:13px;line-height:1.7}
+    #page-progress .progress-card h3{font-size:14px;line-height:1.4}
+    #page-databases .db-tab{font-size:13px}
+    #page-resources .resource-card h3{font-size:14px;line-height:1.4}
+    #page-resources .resource-card .sub,
+    #page-resources .event-card .sub{font-size:13px;line-height:1.45}
+
+    /* Home: reduce the gap before Intended users and above the three home tabs. */
+    #page-home .home-hero{padding-bottom:43px}
+    #page-home .container.section-pad{padding-top:27px}
+    #page-home .audience-cards{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+    #page-home .audience-card{height:100%;min-width:0;align-items:flex-start}
+    #page-home .audience-card>div{min-width:0}
+    #page-home .audience-card h3{font-size:13px;line-height:1.4}
+    #page-home .audience-card p{font-size:12px;line-height:1.55}
+
+    /* Contributions: use the full content width for both partner groups. */
+    #home-tab-contributions .contribution-grid{grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:18px}
+    #home-tab-contributions .contribution-card{width:100%;min-width:0}
+
+    /* UN decisions: keep all three headings at a common height so body text starts evenly. */
+    #page-home .decision-card h3{min-height:4.35em;display:flex;align-items:center;justify-content:center;text-align:center}
+
+    /* How It Works: align the grey connector with the left edge of the response column. */
+    #page-how .flow-arrow-grey{text-align:left;padding-left:20px;margin-top:-12px;margin-bottom:13px}
+    #page-how .flow-arrow-grey svg{margin-left:0}
+    /* Trim only the excess vertical padding inside the first two stage cards. */
+    #page-how .stage-card .stage-body{padding-top:16px;padding-bottom:12px}
+    #page-how .stage-card .stage-fit{padding-top:14px;padding-bottom:14px}
+    #page-how .stage-card .stage-actions{padding-bottom:10px}
+    /* Spread the three case-study choices across the available dark panel height. */
+    #page-how .case-card{display:flex;flex-direction:column;align-items:stretch}
+    #page-how #how-case-studies{display:grid;grid-template-rows:repeat(3,minmax(44px,1fr));gap:8px;flex:1;min-height:160px}
+    #page-how #how-case-studies .case-row{height:100%;min-height:44px;margin:0;}
+
+    /* Databases: all rows are shown at once; retain the table's natural horizontal scroll. */
+    #page-databases .table-wrap{max-height:none;overflow-x:auto;overflow-y:visible}
+    #page-databases .db-table tbody tr{height:auto}
+    #page-databases .db-table td{height:auto;max-height:none}
+
+    @media(max-width:800px){
+      #page-home .audience-cards{grid-template-columns:1fr}
+      #home-tab-contributions .contribution-grid{grid-template-columns:1fr}
+      #page-how .flow-arrow-grey{padding-left:10px}
+    }
+
 </style>
 </head>
 <body>
@@ -431,7 +485,7 @@
           <div class="stage-fit"><div class="fit-box"><div class="micro-label">Where arms-related data fits</div><p>While the precise causal links have not yet been fully established, research has shown that, in specific circumstances, the proliferation or use of illicit weapons can impact conflict.</p><p>Considered together with other data, and contextual factors specific to a region, nation, or locality, arms-related data may provide a useful indication of the risk that conflict may occur, persist, or intensify.</p></div></div>
           <div class="stage-actions"><button class="pill-action" onclick="openHowDetail('benefits')">＋ &nbsp;Benefits of incorporating arms-related data</button><button class="pill-action" onclick="openHowDetail('challenges')">＋ &nbsp;Challenges with incorporating arms-related data</button></div>
         </div>
-        <div class="flow-arrow" style="color:#aab9c8"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v17m-6-6 6 6 6-6"/></svg></div>
+        <div class="flow-arrow flow-arrow-grey" style="color:#aab9c8"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v17m-6-6 6 6 6-6"/></svg></div>
         <div class="stage-bottom">
           <div class="response-card"><div class="micro-label"><svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg> &nbsp;Stages 3 and 4</div><h2 class="response-heading"><span class="stage-heading-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 18-6v14L3 13zM7 14l2 7h4l-2-6"/></svg></span>Warning and response</h2><div class="stage-step"><span class="step-number"><svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></span><div><strong>Warning</strong><p>Analysis is communicated to decision-makers: for example, who is at risk, where, how soon, and with what degree of confidence.</p></div></div><div class="stage-step"><span class="step-number"><svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 12 4-4 4 2 3-2 7 4-5 6-4-2-3 2-6-6Z"/><path d="m7 8 3-3 4 1 2 2m-8 6 3 3m2-5 3 3"/></svg></span><div><strong>Response</strong><p>Decision-makers act on the warning: preventive diplomacy, mediation, deployment to protect civilians, humanitarian action, or measures aimed at the drivers of violence.</p></div></div><div class="response-actions"><button class="pill-action" onclick="openHowDetail('gap')">＋ &nbsp;The warning / response gap</button><button class="pill-action" onclick="openHowDetail('responses')">＋ &nbsp;Arms-related responses</button></div></div>
           <div class="case-card"><h2 class="response-heading">Early-warning systems that already integrate arms-related data</h2><p>Select a system to see how it uses arms-related data in practice.</p><div id="how-case-studies"></div></div>
@@ -455,7 +509,6 @@
         
         <div class="db-meta"><span id="db-result-count">Loading database…</span><div class="db-meta-actions"><button onclick="exportDatabaseCsv()"><i class="ph ph-download-simple"></i> Export CSV</button></div></div>
         <div class="table-wrap"><table class="db-table"><thead id="db-head"></thead><tbody id="db-body"><tr><td>Loading database…</td></tr></tbody></table></div>
-        <div class="pagination"><span id="db-page-info"></span><div class="pager-actions"><button id="db-prev" onclick="changeDatabasePage(-1)">← Previous</button><button id="db-next" onclick="changeDatabasePage(1)">Next →</button></div></div>
         <div class="methodology"><div class="section-kicker">Notes and methodology</div><h2>How these databases were compiled</h2><p>The lists of arms-related data sources and key early-warning initiatives were reviewed by participating experts during the 2024 International Conference and finalized by experts from UNIDIR, CAR, PRIO and Uppsala University. They are living, working tools.</p><p>Both data sources are primarily based on publicly accessible information. Items in brackets “[]” indicate uncertainty or limited public information and hence are “best estimates” by experts from UNIDIR, CAR, PRIO and Uppsala University, based on available information. Arms and ammunition-related data sources are limited to sources that release databases and regular reports.</p><p>Should you identify any inaccurate or incomplete information, or you wish to provide feedback, please contact <a href="mailto:cap-unidir@un.org">cap-unidir@un.org</a>. Requests for inclusion of additional sources or initiatives in the databases are particularly encouraged.</p><p class="update-note">Latest update: March 2025.</p></div>
         <div class="methodology"><div class="definitions-head"><div><div class="section-kicker">Reference guide</div><h2 style="margin:0">Database field definitions</h2><p style="margin:6px 0 0">Definitions {1}–{21} correspond to the numbered fields used in the two databases.</p></div><button class="definitions-toggle" onclick="toggleDefinitions()" id="definitions-toggle">＋ Show definitions</button></div><div class="definitions-grid" id="definitions-grid"></div></div>
         <div class="cta"><div><strong>Want your arm&#x73;-related data or early-warning initiative to be featured in the database?</strong><small>Get in touch: cap-unidir@un.org</small></div><a class="cta-arrow" href="mailto:cap-unidir@un.org?subject=Database%20inclusion%20request" aria-label="Contact UNIDIR"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
@@ -766,16 +819,16 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
     const PROGRESS_COLORS={Data:'#009edb',Capacity:'#6a9b52',Policy:'#d29a35',Partnerships:'#8b6bb1'};
     function renderProgress(){
       const all=rows('progress');const groups=[];all.forEach((r,i)=>{const label=field(r,'Heading')||'Other';let g=groups.find(x=>x.label===label);if(!g){g={label,tag:field(r,'Heading Icon')||label,items:[]};groups.push(g);}g.items.push({row:r,index:i});});
-      document.getElementById('progress-groups').innerHTML=groups.map(g=>`<section class="progress-group" style="--group-color:${PROGRESS_COLORS[g.tag]||'#009edb'}"><div class="group-head"><span class="group-tag">${esc(g.tag)}</span><h2>${rich(g.label)}</h2></div><div class="progress-cards">${g.items.map(({row,index})=>{const title=field(row,'Title')||'Initiative';const desc=field(row,'Short description');const icon=PROGRESS_ICONS[g.tag]||'ph-sparkle';const hasDetail=field(row,'Content')&&field(row,'Content')!=='[]';return `<button class="progress-card" onclick="openProgress(${index})"><span class="progress-plus">+</span><span class="progress-icon">${svgIcon(icon,19)}</span><h3>${rich(title)}</h3><p>${rich(desc||'Early-warning systems that already integrate arms-related data to follow.')}</p></button>`;}).join('')}</div></section>`).join('');
+      document.getElementById('progress-groups').innerHTML=groups.map(g=>`<section class="progress-group" style="--group-color:${PROGRESS_COLORS[g.tag]||'#009edb'}"><div class="group-head"><span class="group-tag">${esc(g.tag)}</span><h2>${rich(g.label)}</h2></div><div class="progress-cards">${g.items.map(({row,index})=>{const title=field(row,'Title')||'Initiative';const desc=field(row,'Short description');const icon=PROGRESS_ICONS[g.tag]||'ph-sparkle';const hasDetail=field(row,'Content')&&field(row,'Content')!=='[]';return `<button class="progress-card" onclick="openProgress(${index})"><span class="progress-icon">${svgIcon(icon,19)}</span><h3>${rich(title)}</h3><p>${rich(desc||'Early-warning systems that already integrate arms-related data to follow.')}</p></button>`;}).join('')}</div></section>`).join('');
     }
-    function openProgress(index){const row=rows('progress')[index];const title=field(row,'Title')||'Initiative';const detail=field(row,'Content');const body=detail&&detail!=='[]'?`<p>${rich(detail)}</p>`:`<p>${rich(field(row,'Short description')||'Early-warning systems that already integrate arms-related data to follow.')}</p><div class="fit-box"><p style="margin:0">Additional case-study details upcoming.</p></div>`;openModal(title,`<div class="micro-label">${esc(field(row,'Heading'))}</div>${body}`);}
+    function openProgress(index){const row=rows('progress')[index];const title=field(row,'Title')||'Initiative';const detail=field(row,'Content');const body=detail&&detail!=='[]'?`<p>${rich(detail)}</p>`:`<p>${rich(field(row,'Short description')||'Early-warning systems that already integrate arms-related data to follow.')}</p><div class="fit-box"><p style="margin:0">Additional case-study details have not yet been supplied in the current worksheet.</p></div>`;openModal(title,`<div class="micro-label">${esc(field(row,'Heading'))}</div>${body}`);}
 
     function setDbTab(tab){dbTab=tab;dbPage=1;dbSort={key:'',dir:1};dbFilters={};document.getElementById('db-tab-sources').classList.toggle('active',tab==='sources');document.getElementById('db-tab-ews').classList.toggle('active',tab==='ews');renderDatabase();}
     function databaseConfig(){
       const key=dbTab==='sources'?'dataSources':'earlyWarning';
       const name=dbTab==='sources'?'Database of Arms-Related Data':'Database of Early-Warning Initiatives';
       const data=rows(key);const columns=Object.keys(data[0]||{}).filter(k=>k&&!/^__blank_/i.test(k)&&!/^__parsed_extra/i.test(k));
-      return {key,name,pageSize:7,columns,filters:[]};
+      return {key,name,pageSize:Math.max(1,data.length),columns,filters:[]};
     }
     function findHeader(row,header){const n=norm(header);const key=Object.keys(row||{}).find(k=>norm(k)===n);return key||header;}
     function renderDatabase(){
@@ -798,16 +851,16 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
     function renderDatabaseResults(){
       const cfg=databaseConfig();const source=rows(cfg.key);let filtered=[...source];
       if(dbSort.key){filtered.sort((a,b)=>field(a,dbSort.key).localeCompare(field(b,dbSort.key),undefined,{numeric:true,sensitivity:'base'})*dbSort.dir);}
-      dbFilteredRows=filtered;const total=filtered.length;const pages=Math.max(1,Math.ceil(total/dbPageSize));if(dbPage>pages)dbPage=pages;const start=(dbPage-1)*dbPageSize;const current=filtered.slice(start,start+dbPageSize);
+      dbFilteredRows=filtered;const total=filtered.length;const current=filtered;
       document.getElementById('db-result-count').textContent=`${total} ${total===1?'entry':'entries'} · ${cfg.name}`;
       document.getElementById('db-head').innerHTML=`<tr>${cfg.columns.map((col,j)=>`<th class="${j===0?'first-col':''}"><button onclick="sortDatabase('${esc(findHeader(source[0],col))}')">${databaseHeaderLabel(col)} ${dbSort.key===findHeader(source[0],col)?(dbSort.dir===1?'↑':'↓'):''}</button></th>`).join('')}</tr>`;
       document.getElementById('db-body').innerHTML=current.length?current.map(r=>`<tr>${cfg.columns.map((col,j)=>{const val=field(r,findHeader(r,col));if(j===0){const url=externalHref(firstField(r,['Website / Sources / Learn More','Link','Website','URL']));const content=databaseCell(val,true,col);return `<td class="first-col" title="${esc(val)}">${url?`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${content}</a>`:content}</td>`;}return `<td class="${/notes/i.test(col)?'notes-cell':''}" title="${esc(val)}">${databaseCell(val,false,col)}</td>`;}).join('')}</tr>`).join(''):`<tr><td colspan="${cfg.columns.length}" style="padding:34px;text-align:center;color:#8795a5">No entries are currently available.</td></tr>`;
-      document.getElementById('db-page-info').textContent=total?`Showing ${start+1}–${Math.min(start+dbPageSize,total)} of ${total}`:'No results';document.getElementById('db-prev').disabled=dbPage<=1;document.getElementById('db-next').disabled=dbPage>=pages;
+
     }
     function sortDatabase(key){if(dbSort.key===key)dbSort.dir*=-1;else dbSort={key,dir:1};renderDatabaseResults();}
     function changeDatabasePage(direction){dbPage+=direction;renderDatabaseResults();}
     function resetDatabaseFilters(){dbSort={key:'',dir:1};dbPage=1;renderDatabaseResults();}
-    function openDatabaseEntry(index){const row=dbFilteredRows[(dbPage-1)*dbPageSize+index];if(!row)return;const title=field(row,'Sources of arms and ammunition flows data')||field(row,'Initiative')||'Database entry';const fields=Object.entries(row).filter(([k,v])=>String(v??'').trim()!=='').map(([k,v])=>`<div class="detail-field"><dt>${databaseHeaderLabel(k)}</dt><dd>${databaseCell(v,false,k)}</dd></div>`).join('');openModal(title,`<div class="detail-grid">${fields}</div>`);}
+    function openDatabaseEntry(index){const row=dbFilteredRows[index];if(!row)return;const title=field(row,'Sources of arms and ammunition flows data')||field(row,'Initiative')||'Database entry';const fields=Object.entries(row).filter(([k,v])=>String(v??'').trim()!=='').map(([k,v])=>`<div class="detail-field"><dt>${databaseHeaderLabel(k)}</dt><dd>${databaseCell(v,false,k)}</dd></div>`).join('');openModal(title,`<div class="detail-grid">${fields}</div>`);}
     function exportDatabaseCsv(){const cfg=databaseConfig();const data=dbFilteredRows;if(!data.length){toast('No rows to export');return;}const keys=Object.keys(data[0]);const cell=v=>'"'+String(v??'').replace(/"/g,'""')+'"';const csv=[keys.map(cell).join(','),...data.map(r=>keys.map(k=>cell(r[k])).join(','))].join('\r\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=(dbTab==='sources'?'arms-related-data-sources':'early-warning-initiatives')+'.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);}
     function toggleDefinitions(){const grid=document.getElementById('definitions-grid');const open=grid.classList.toggle('open');document.getElementById('definitions-toggle').textContent=open?'− Hide definitions':'＋ Show definitions';}
     function renderDefinitions(){document.getElementById('definitions-grid').innerHTML=FIELD_DEFINITIONS.map(([n,title,desc])=>`<article class="definition-item" data-number="${n}"><strong>${esc(title)}</strong><p>${esc(desc)}</p></article>`).join('');}
