@@ -391,6 +391,28 @@
       #page-home .home-hero{padding-bottom:23px!important;}
     }
 
+
+
+    /* TARGETED NOVEMBER 2026 FEEDBACK — Progress readability, database tabs and linked case studies. */
+    /* Progress introduction: match the site's updated body-copy scale. */
+    #page-progress .progress-intro p{font-size:14px!important;line-height:1.7;}
+    /* Progress cards: keep every icon and title consistently anchored at the upper-left corner. */
+    #page-progress .progress-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:left;}
+    #page-progress .progress-card .progress-icon{align-self:flex-start;margin:0 0 12px 0;flex:0 0 34px;}
+    #page-progress .progress-card h3{align-self:stretch;width:100%;margin:0 0 7px 0;text-align:left;}
+    #page-progress .progress-card p{align-self:stretch;width:100%;text-align:left;}
+    /* Database tabs: use two distinct UNIDIR accents instead of a dark-navy active state. */
+    #page-databases #db-tab-sources.active{background:#009edb!important;color:#fff!important;border-color:#009edb!important;box-shadow:0 2px 7px rgba(0,158,219,.2);}
+    #page-databases #db-tab-ews.active{background:#e8a900!important;color:#1a2b3c!important;border-color:#e8a900!important;box-shadow:0 2px 7px rgba(232,169,0,.2);}
+    #modal-content .case-study-inline-link{color:#009edb;font-weight:700;text-decoration:underline;text-decoration-color:#9dd8f1;text-underline-offset:2px;}
+    #modal-content .case-study-inline-link:hover{color:#087fae;text-decoration-color:#087fae;}
+
+
+    /* FINAL NOVEMBER 2026: requested Progress intro readability and Home tab spacing. */
+    /* Slightly enlarge the Progress introduction to match the updated body-copy scale. */
+    #page-progress .progress-intro p{font-size:15px!important;line-height:1.75;}
+    /* Remove the remaining top gap between Intended users and the Home sub-navigation. */
+    #page-home .container.section-pad{padding-top:0!important;}
 </style>
 </head>
 <body>
@@ -839,6 +861,14 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
     function openModal(title,content){document.getElementById('modal-title').textContent=title;document.getElementById('modal-content').innerHTML=content;document.getElementById('modal-backdrop').classList.add('open');document.body.style.overflow='hidden';document.querySelector('.modal-close').focus();}
     function closeModal(event){if(event&&event.target!==document.getElementById('modal-backdrop'))return;document.getElementById('modal-backdrop').classList.remove('open');document.body.style.overflow='';}
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+    document.getElementById('modal-content').addEventListener('click',event=>{
+      const link=event.target.closest('a[data-case-study]');
+      if(!link)return;
+      event.preventDefault();
+      const key=link.getAttribute('data-case-study');
+      closeModal();
+      openCaseStudy(key);
+    });
 
     // HOME RENDERERS — Populate contributions and acknowledgements from their published worksheets.
     function renderContributions(){
@@ -860,7 +890,19 @@ const SOURCE_STATUS = Object.fromEntries(SOURCE_CONFIG.map(s=>[s.key,{state:'sna
       document.getElementById('how-case-studies').innerHTML=CASES.map(c=>`<button class="case-row" onclick="openCaseStudy('${esc(c.key)}')"><span>${esc(c.label)}</span>${svgIcon('plus',16)}</button>`).join('');
     }
     function openIncident(index){const item=INCIDENTS[index];const scenario=field(howRow(),item.key);openModal(item.label,`<p>${rich(scenario||'The scenario is not currently available in the published worksheet.')}</p>`);}
-    function openHowDetail(which){const item=HOW_DETAIL_KEYS[which];if(!item)return;openModal(item.title,`<p>${rich(field(howRow(),item.key)||'This content is not currently available in the published worksheet.')}</p>`);}
+    function linkCommunityCaseStudies(html){
+      const caseLink=(key,label)=>`<a class="case-study-inline-link" href="#case-study-${key.toLowerCase().replace(/[^a-z0-9]+/g,'-')}" data-case-study="${esc(key)}">${esc(label)}</a>`;
+      const linkedSentence=`To see how this works in practice, see the ${caseLink('WARN/NEWS','WARN/NEWS')}, ${caseLink('ECOWARN','ECOWARN')}, or ${caseLink('CEWARN','CEWARN')} case studies.`;
+      const promptPattern=/To see how this works in practice,\s*(?:(?:click on)\s*|(?:see)\s+(?:the\s+)?)WARN\/NEWS,\s*ECOWARN,\s*or\s*CEWARN\s*case studies(?:\s+below)?\.?/i;
+      return html.replace(promptPattern,linkedSentence);
+    }
+    function openHowDetail(which){
+      const item=HOW_DETAIL_KEYS[which];if(!item)return;
+      const raw=field(howRow(),item.key)||'This content is not currently available in the published worksheet.';
+      let body=rich(raw);
+      if(which==='community')body=linkCommunityCaseStudies(body);
+      openModal(item.title,`<div>${body}</div>`);
+    }
     function openCaseStudy(key){const detail=field(howRow(),key);openModal(key,`<div class="micro-label">Early-warning system case study</div><p>${rich(detail||'Further case-study content will be added to the source worksheet.')}</p>`);}
 
     const PROGRESS_ICONS={Data:'database',Capacity:'book',Policy:'scale',Partnerships:'handshake'};
